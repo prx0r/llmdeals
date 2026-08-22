@@ -55,6 +55,36 @@ import Base from '../layouts/Base.astro';
     </section>
 
     <section class="section">
+      <h2>Effective value multiple (the honest metric)</h2>
+      <p>A subscription's headline "value" is meaningless until you account for how much you can actually use. We compute it per model:</p>
+      <pre>agent request profile: 830 input + 71,500 cached + 295 output tokens
+cost_per_request       = (in*830 + cached*71,500 + out*295) / 1M   [per-model rates]
+effective_multiple     = monthly_request_cap x cost_per_request / subscription_fee</pre>
+      <p style="margin-top:12px;font-size:13px;color:var(--text-dim)">Above 1x beats pay-as-you-go. Below 1x, the subscription destroys value for that route — we flag it in red rather than hide it.</p>
+    </section>
+
+    <section class="section">
+      <h2>Mega-deal detection</h2>
+      <p>Adapted from our dell research stack. A route is flagged 🔥 Mega only when stated facts cross thresholds:</p>
+      <ul class="dont-list">
+        <li>Request quota ≥ 100K/month</li>
+        <li>Effective multiple ≥ 2x (≥3x scores higher)</li>
+        <li>Free tier with ≥1,000 requests/day</li>
+        <li>Any route below 1x is disqualified regardless of other factors</li>
+      </ul>
+      <p style="margin-top:12px;font-size:13px;color:var(--text-dim)">Every badge shows its reasons — no opaque single scores.</p>
+    </section>
+
+    <section class="section">
+      <h2>Task-profile scores</h2>
+      <p>The homepage table rescores every route under four weightings:</p>
+      <pre>overall:  quality .35 / cost .35 / reliability .20 / throughput .10
+coding:   quality .40 / cost .30 / reliability .20 / throughput .10
+agents:   quality .30 / cost .25 / reliability .25 / throughput .20
+research: quality .35 / cost .25 / reliability .20 / throughput .20</pre>
+    </section>
+
+    <section class="section">
       <h2>What we don't do</h2>
       <ul class="dont-list">
         <li>We don't rank by affiliate commission</li>
