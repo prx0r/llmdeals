@@ -1,0 +1,279 @@
+{
+  "generated_at": "2026-08-22T19:46:42.075Z",
+  "schema_version": "llmdeals.api.v1",
+  "deals": [
+    {
+      "kind": "route",
+      "slug": "opencode-go-mimo-v2.5",
+      "id": "opencode-go:mimo-v2.5",
+      "title": "OpenCode Go + MiMo V2.5",
+      "model": "MiMo V2.5",
+      "model_id": "mimo-v2.5",
+      "provider": "OpenCode",
+      "provider_id": "opencode",
+      "product": "OpenCode Go",
+      "deal_type": "subscription",
+      "label": "Subscription",
+      "price_intro_usd": 5,
+      "price_recurring_usd": 10,
+      "allowance_month_usd": 60,
+      "requests_per_month": 150400,
+      "role": "bulk_executor",
+      "ongoing_value_multiple": 6,
+      "intro_value_multiple": 12,
+      "effective_input_per_m": 0.02333,
+      "effective_output_per_m": 0.04667,
+      "list_input_per_m": 0.14,
+      "list_output_per_m": 0.28,
+      "ctx": "131K",
+      "rating": "exceptional",
+      "rank_score": 96,
+      "confidence": "high",
+      "why_good": "Strong coding capability combined with extremely high usable volume. MiMo V2.5 is a capable reasoning model and OpenCode Go gives it an enormous ~150K requests/month allowance for just $10/month.",
+      "catch": "Provider limits and model lineup can change. 5-hour and weekly caps constrain bursty usage.",
+      "best_for": [
+        "coding agents",
+        "bulk implementation",
+        "high-volume development"
+      ],
+      "source_url": "https://opencode.ai/docs/go/",
+      "observed_at": "2026-08-23T00:00:00Z",
+      "affiliate_url": null,
+      "scores": {
+        "quality": 0.6,
+        "cost": 0.84,
+        "reliability": 1,
+        "throughput": 1,
+        "profiles": {
+          "overall": 80,
+          "coding": 79,
+          "agentic": 84,
+          "research": 82
+        }
+      },
+      "badges": [
+        "Tools"
+      ]
+    },
+    {
+      "kind": "offer",
+      "slug": "gemini-free",
+      "id": "gemini-free-2026-08",
+      "title": "Gemini API Free",
+      "model": null,
+      "model_id": null,
+      "provider": "Google AI",
+      "provider_id": "google_ai",
+      "product": "Gemini API Free",
+      "deal_type": "free",
+      "label": "Free",
+      "price_intro_usd": 0,
+      "price_recurring_usd": 0,
+      "allowance_month_usd": null,
+      "requests_per_month": null,
+      "free_requests_per_day": null,
+      "role": null,
+      "ongoing_value_multiple": null,
+      "intro_value_multiple": null,
+      "effective_input_per_m": null,
+      "effective_output_per_m": null,
+      "list_input_per_m": null,
+      "list_output_per_m": null,
+      "ctx": null,
+      "rating": "good",
+      "rank_score": 75,
+      "confidence": "medium",
+      "why_good": "Free tier for supported Gemini models. Huge context windows (up to 1M tokens) at no cost within quotas.",
+      "catch": "Dynamic quotas per model/project. Not suitable for production workloads.",
+      "best_for": [
+        "experimentation",
+        "learning",
+        "prototyping"
+      ],
+      "note": "Free input/output for supported models within model/project limits",
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "observed_at": "2026-08-23T00:00:00Z",
+      "affiliate_url": null,
+      "scores": {
+        "quality": 0.1,
+        "cost": 0.33,
+        "reliability": 0.7,
+        "throughput": 0.15,
+        "profiles": {
+          "overall": 31,
+          "coding": 30,
+          "agentic": 32,
+          "research": 29
+        }
+      },
+      "badges": [
+        "Free"
+      ]
+    },
+    {
+      "kind": "offer",
+      "slug": "groq-free",
+      "id": "groq-free-2026-08",
+      "title": "GroqCloud Free",
+      "model": null,
+      "model_id": null,
+      "provider": "Groq",
+      "provider_id": "groq",
+      "product": "GroqCloud Free",
+      "deal_type": "free",
+      "label": "Free",
+      "price_intro_usd": 0,
+      "price_recurring_usd": 0,
+      "allowance_month_usd": null,
+      "requests_per_month": null,
+      "free_requests_per_day": null,
+      "role": null,
+      "ongoing_value_multiple": null,
+      "intro_value_multiple": null,
+      "effective_input_per_m": null,
+      "effective_output_per_m": null,
+      "list_input_per_m": null,
+      "list_output_per_m": null,
+      "ctx": null,
+      "rating": "good",
+      "rank_score": 74,
+      "confidence": "high",
+      "why_good": "Very fast inference with reasonable free-tier limits. Good for testing multiple models.",
+      "catch": "Rate limits vary by model and can be tight for production use.",
+      "best_for": [
+        "fast inference",
+        "prototyping",
+        "model testing"
+      ],
+      "note": "Model-specific RPM/RPD/TPM/TPD limits on free plan",
+      "source_url": "https://console.groq.com/docs/rate-limits",
+      "observed_at": "2026-08-23T00:00:00Z",
+      "affiliate_url": null,
+      "scores": {
+        "quality": 0.1,
+        "cost": 0.33,
+        "reliability": 1,
+        "throughput": 0.15,
+        "profiles": {
+          "overall": 37,
+          "coding": 36,
+          "agentic": 39,
+          "research": 35
+        }
+      },
+      "badges": [
+        "Free"
+      ]
+    },
+    {
+      "kind": "offer",
+      "slug": "cloudflare-workers-free",
+      "id": "cloudflare-workers-free-2026-08",
+      "title": "Workers AI Free",
+      "model": null,
+      "model_id": null,
+      "provider": "Cloudflare",
+      "provider_id": "cloudflare",
+      "product": "Workers AI Free",
+      "deal_type": "free",
+      "label": "Free",
+      "price_intro_usd": 0,
+      "price_recurring_usd": 0,
+      "allowance_month_usd": null,
+      "requests_per_month": null,
+      "free_requests_per_day": null,
+      "role": null,
+      "ongoing_value_multiple": null,
+      "intro_value_multiple": null,
+      "effective_input_per_m": null,
+      "effective_output_per_m": null,
+      "list_input_per_m": null,
+      "list_output_per_m": null,
+      "ctx": null,
+      "rating": "good",
+      "rank_score": 72,
+      "confidence": "high",
+      "why_good": "10,000 neurons/day free is genuinely useful for prototyping. $3.30/mo equivalent value at paid rates.",
+      "catch": "Requires Cloudflare Workers ecosystem. Neuron-based pricing is opaque compared to token pricing.",
+      "best_for": [
+        "edge inference",
+        "low-latency global",
+        "experimentation"
+      ],
+      "note": null,
+      "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+      "observed_at": "2026-08-23T00:00:00Z",
+      "affiliate_url": null,
+      "scores": {
+        "quality": 0.1,
+        "cost": 0.33,
+        "reliability": 1,
+        "throughput": 0.15,
+        "profiles": {
+          "overall": 37,
+          "coding": 36,
+          "agentic": 39,
+          "research": 35
+        }
+      },
+      "badges": [
+        "Free"
+      ]
+    },
+    {
+      "kind": "offer",
+      "slug": "openrouter-unlock",
+      "id": "openrouter-unlock-2026-08",
+      "title": "OpenRouter Funded",
+      "model": null,
+      "model_id": null,
+      "provider": "OpenRouter",
+      "provider_id": "openrouter",
+      "product": "OpenRouter Funded",
+      "deal_type": "unlock",
+      "label": "Unlock",
+      "price_intro_usd": 10,
+      "price_recurring_usd": 0,
+      "allowance_month_usd": null,
+      "requests_per_month": null,
+      "free_requests_per_day": null,
+      "role": null,
+      "ongoing_value_multiple": null,
+      "intro_value_multiple": null,
+      "effective_input_per_m": null,
+      "effective_output_per_m": null,
+      "list_input_per_m": null,
+      "list_output_per_m": null,
+      "ctx": null,
+      "rating": "good",
+      "rank_score": 70,
+      "confidence": "high",
+      "why_good": "$10 balance unlocks 1,000 free-model requests/day. Balance remains spendable.",
+      "catch": "Only applies to free models. Paid model usage costs extra.",
+      "best_for": [
+        "multi-model access",
+        "model comparison",
+        "flexible routing"
+      ],
+      "note": "Balance remains spendable, unlocks higher free-model quota",
+      "source_url": "https://openrouter.ai/blog/tutorials/how-to-get-the-lowest-cost-llm-inference-on-openrouter/",
+      "observed_at": "2026-08-23T00:00:00Z",
+      "affiliate_url": null,
+      "scores": {
+        "quality": 0.1,
+        "cost": 0.33,
+        "reliability": 1,
+        "throughput": 0.15,
+        "profiles": {
+          "overall": 37,
+          "coding": 36,
+          "agentic": 39,
+          "research": 35
+        }
+      },
+      "badges": [
+        "Unlock"
+      ]
+    }
+  ]
+}

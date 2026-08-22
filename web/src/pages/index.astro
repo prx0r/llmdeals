@@ -1,5 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
+import derived from '../data/deals-derived.json';
+
+const routeRows = derived.deals.filter(d => d.kind === 'route');
+const offerRows = derived.deals.filter(d => d.kind === 'offer');
 
 const topDeals = [
   {rank:1,slug:"opencode-go-mimo-v2.5",title:"OpenCode Go + MiMo-V2.5",tagline:"Best overall deal right now",whatYouGet:"Pay $10/month, get $60 of API usage. That is $60 worth of MiMo-V2.5 coding model calls for every $10 you spend.",realNumbers:"MiMo-V2.5 gets you ~150,000 typical requests per month. First month is only $5.",howToGetIt:"Sign up at opencode.ai/go, subscribe to Go, start using MiMo-V2.5.",whyItsGood:"MiMo is a genuinely strong coding model. The usage allowance is 6x what you pay - unusual for any AI subscription.",catch:"OpenCode can change limits or model lineup at any time.",bestFor:"People who run coding agents or write a lot of code with AI.",source:"https://opencode.ai/docs/go/"},
@@ -9,20 +13,7 @@ const topDeals = [
   {rank:5,slug:"openrouter-unlock",title:"OpenRouter Free + Funded",tagline:"Best multi-model access",whatYouGet:"50 free requests/day on 25+ models. Add $10 (spendable credit, does not expire) to unlock 1,000 free-model requests/day.",realNumbers:"Free tier: 50 RPD. Funded tier: 1,000 RPD. Credit remains usable for paid models too.",howToGetIt:"Sign up at openrouter.ai. To unlock: add $10+ credit balance.",whyItsGood:"Access many models through one API. The $10 unlock is spendable, not a fee.",catch:"Free-model requests only. Paid models cost extra on top of your balance.",bestFor:"Comparing models, flexible routing, low-volume multi-model use.",source:"https://openrouter.ai/pricing"}
 ];
 
-const allRoutes = [
-  {model:"MiMo V2.5",id:"mimo-v2.5",ctx:"131K",inP:0.14,outP:0.28,requests:150400,effIn:"$0.00093",effOut:"$0.00187",role:"bulk_executor",rating:"exceptional",score:96,note:"Best balance of quality, volume, and value"},
-  {model:"Muse Spark 1.2",id:"muse-spark-1.2",ctx:"128K",inP:0.10,outP:0.20,requests:226600,effIn:"$0.00044",effOut:"$0.00088",role:"bulk_executor",rating:"exceptional",score:93,note:"Highest volume, lighter model"},
-  {model:"HY3",id:"hy3",ctx:"128K",inP:0.10,outP:0.20,requests:21500,effIn:"$0.00465",effOut:"$0.00930",role:"orchestration",rating:"excellent",score:89,note:"Cheapest orchestration model"},
-  {model:"DeepSeek V4 Flash",id:"deepseek-v4-flash",ctx:"128K",inP:0.14,outP:0.28,requests:37800,effIn:"$0.00370",effOut:"$0.00741",role:"balanced",rating:"excellent",score:87,note:"Strong all-rounder"},
-  {model:"Kimi K2.7 Code",id:"kimi-k2.7-code",ctx:"128K",inP:0.14,outP:0.28,requests:6750,effIn:"$0.02074",effOut:"$0.04148",role:"coding",rating:"excellent",score:85,note:"Best for code generation"},
-  {model:"Qwen 3.7 Plus",id:"qwen3.7-plus",ctx:"128K",inP:0.10,outP:0.20,requests:21600,effIn:"$0.00463",effOut:"$0.00926",role:"balanced",rating:"good",score:78,note:"Solid mid-range"},
-  {model:"MiniMax M3",id:"minimax-m3",ctx:"128K",inP:0.14,outP:0.28,requests:16000,effIn:"$0.00625",effOut:"$0.01250",role:"balanced",rating:"good",score:76,note:"Good balance"},
-  {model:"DeepSeek V4 Pro",id:"deepseek-v4-pro",ctx:"128K",inP:0.28,outP:0.56,requests:5200,effIn:"$0.01923",effOut:"$0.03846",role:"reasoning",rating:"good",score:75,note:"Strong reasoning"},
-  {model:"GPT-5.6 Luna",id:"gpt-5.6-luna",ctx:"128K",inP:0.25,outP:1.00,requests:10250,effIn:"$0.00976",effOut:"$0.03902",role:"balanced",rating:"good",score:73,note:"GPT quality at Go prices"},
-  {model:"GLM 5.3",id:"glm-5.3",ctx:"128K",inP:0.28,outP:0.56,requests:1080,effIn:"$0.09259",effOut:"$0.18519",role:"premium_reasoning",rating:"niche",score:65,note:"Very low volume"},
-  {model:"Kimi K3",id:"kimi-k3",ctx:"128K",inP:0.28,outP:0.56,requests:490,effIn:"$0.20408",effOut:"$0.40816",role:"premium_reasoning",rating:"niche",score:60,note:"Lowest volume"},
-  {model:"Grok 4.5",id:"grok-4.5",ctx:"128K",inP:0.50,outP:2.00,requests:600,effIn:"$0.16667",effOut:"$0.66667",role:"premium_reasoning",rating:"niche",score:58,note:"Expensive, low volume"},
-];
+
 
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -65,14 +56,20 @@ const dealCardsHtml = topDeals.map(d => `
   <section style="margin-top:56px">
     <div class="section-header">
       <h2>All OpenCode Go model routes</h2>
-      <span class="stats">12 routes - $10/month ($5 first month) - $60 usage pool</span>
+      <span class="stats">{routeRows.length} OpenCode Go routes</span>
     </div>
     <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px">
       <strong>Score</strong> = overall value ranking (quality x volume x economics). 
       <strong>Effective cost</strong> = what you actually pay per request after the $60 usage pool is applied.
     </p>
     <div class="toolbar">
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <div class="tabs" id="tabs">
+          <button class="tab active" data-profile="overall">Overall</button>
+          <button class="tab" data-profile="coding">Coding</button>
+          <button class="tab" data-profile="agentic">Agents</button>
+          <button class="tab" data-profile="research">Research</button>
+        </div>
         <input type="search" id="q" placeholder="Search models..." />
         <select id="filter-role"><option value="">All roles</option>
           <option value="bulk_executor">Bulk executor</option>
@@ -87,26 +84,34 @@ const dealCardsHtml = topDeals.map(d => `
     <div class="table-wrap">
       <table id="routes-table">
         <thead><tr>
-          <th data-col="score" data-num title="Overall value: quality x volume x economics">Score</th>
+          <th data-col="overall" data-num title="Weighted: quality/cost/reliability/throughput - switch profiles above">Score</th>
           <th data-col="model">Model</th>
           <th data-col="ctx">Context</th>
-          <th data-col="inP" data-num title="Standard API price per million input tokens">List $/M In</th>
-          <th data-col="outP" data-num title="Standard API price per million output tokens">List $/M Out</th>
-          <th data-col="effIn" title="What you actually pay per request with Go $60 pool">Eff. Cost/Req In</th>
-          <th data-col="effOut" title="What you actually pay per request with Go $60 pool">Eff. Cost/Req Out</th>
-          <th data-col="requests" data-num title="Estimated requests per month on Go $60 pool">Req/Mo</th>
+          <th data-col="inP" data-num>List $/M In</th>
+          <th data-col="outP" data-num>List $/M Out</th>
+          <th data-col="effIn" data-num>Eff $/M In</th>
+          <th data-col="effOut" data-num>Eff $/M Out</th>
+          <th data-col="requests" data-num>Req/Mo</th>
+          <th>Badges</th>
           <th data-col="role">Role</th>
-          <th data-col="note">Why this rank</th>
         </tr></thead>
         <tbody id="routes-body"></tbody>
       </table>
     </div>
   </section>
 
-  <script define:vars={{ allRoutes: JSON.stringify(allRoutes) }}>
+  <script define:vars={{ allRoutes: JSON.stringify(routeRows.map(r => ({model:r.model,id:r.model_id,ctx:r.ctx,inP:r.list_input_per_m,outP:r.list_output_per_m,effIn:r.effective_input_per_m,effOut:r.effective_output_per_m,requests:r.requests_per_month,role:r.role,scores:r.scores.profiles,badges:r.badges}))) }}>
     const routes = JSON.parse(allRoutes);
-    let sort = {col:'score', dir:'desc'};
+    let sort = {col:'overall', dir:'desc'};
+    let profile = 'overall';
     let filtered = [...routes];
+
+    function cell(v) {
+      if (v >= 80) return 'var(--accent)';
+      if (v >= 65) return 'var(--blue)';
+      if (v >= 50) return 'var(--yellow)';
+      return 'var(--text-dim)';
+    }
 
     function render() {
       const tbody = document.getElementById('routes-body');
@@ -114,27 +119,22 @@ const dealCardsHtml = topDeals.map(d => `
       const q = (document.getElementById('q')?.value||'').toLowerCase();
       const fr = document.getElementById('filter-role')?.value||'';
       filtered = routes.filter(r => {
-        if (q && !(r.model+r.role+r.note).toLowerCase().includes(q)) return false;
+        if (q && !(r.model+r.role+r.badges.join(' ')).toLowerCase().includes(q)) return false;
         if (fr && r.role !== fr) return false;
         return true;
       });
-      filtered.sort((a,b) => {
-        let va = a[sort.col], vb = b[sort.col];
-        if (typeof va === 'string') return sort.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
-        return sort.dir === 'asc' ? va-vb : vb-va;
-      });
-      const rc = {exceptional:'var(--accent)',excellent:'var(--blue)',good:'var(--yellow)',niche:'var(--text-dim)'};
+      filtered.sort((a,b) => sort.dir === 'asc' ? a[sort.col]-b[sort.col] : b[sort.col]-a[sort.col]);
       tbody.innerHTML = filtered.map(r => `<tr>
-        <td class="price" style="color:var(--accent);font-size:16px;font-weight:800">${r.score}</td>
+        <td class="price" style="color:${cell(r[profile])};font-size:16px;font-weight:800">${r[profile]}</td>
         <td><div class="model-name">${r.model}</div><div class="model-sub">${r.id}</div></td>
         <td style="font-size:12px;color:var(--text-dim)">${r.ctx}</td>
         <td style="font-size:11px;font-variant-numeric:tabular-nums">$${r.inP}</td>
         <td style="font-size:11px;font-variant-numeric:tabular-nums">$${r.outP}</td>
-        <td style="font-size:11px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600">${r.effIn}</td>
-        <td style="font-size:11px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600">${r.effOut}</td>
-        <td style="font-size:12px;font-variant-numeric:tabular-nums">${r.requests.toLocaleString()}</td>
-        <td style="font-size:11px;color:var(--text-dim)">${r.role.replace(/_/g,' ')}</td>
-        <td style="font-size:11px;color:var(--text-muted);max-width:180px">${r.note}</td>
+        <td style="font-size:11px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600">$${Number(r.effIn).toFixed(5)}</td>
+        <td style="font-size:11px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600">$${Number(r.effOut).toFixed(5)}</td>
+        <td style="font-size:12px;font-variant-numeric:tabular-nums">${r.requests ? r.requests.toLocaleString() : '-'}</td>
+        <td>${r.badges.map(b=>`<span class="badge badge-type" style="margin-right:3px">${b}</span>`).join('')}</td>
+        <td style="font-size:11px;color:var(--text-dim)">${(r.role||'').replace(/_/g,' ')}</td>
       </tr>`).join('');
       document.querySelectorAll('th[data-col]').forEach(th => {
         th.classList.remove('sorted-asc','sorted-desc');
@@ -145,10 +145,17 @@ const dealCardsHtml = topDeals.map(d => `
       th.addEventListener('click', () => {
         const col = th.dataset.col;
         if (sort.col === col) sort.dir = sort.dir === 'asc' ? 'desc' : 'asc';
-        else { sort.col = col; sort.dir = col === 'score' ? 'desc' : 'asc'; }
+        else { sort.col = col; sort.dir = 'desc'; }
         render();
       });
     });
+    document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      profile = t.dataset.profile;
+      sort = {col:profile, dir:'desc'};
+      render();
+    }));
     document.getElementById('q')?.addEventListener('input', render);
     document.getElementById('filter-role')?.addEventListener('change', render);
     render();

@@ -1,53 +1,33 @@
 ---
 import Base from '../layouts/Base.astro';
+import derived from '../data/deals-derived.json';
 
-const deals = [
-  {slug:"opencode-go-mimo-v2.5",provider:"OpenCode",product:"OpenCode Go",model:"MiMo V2.5",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:150400,value:"6x",role:"bulk_executor",rating:"exceptional",score:96,why:"Strong coding model + huge usage allowance",bestFor:"Coding agents, heavy development",catch:"Provider limits can change",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-muse-spark-1.2",provider:"OpenCode",product:"OpenCode Go",model:"Muse Spark 1.2",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:226600,value:"6x",role:"bulk_executor",rating:"exceptional",score:93,why:"Highest request volume at ~226K/month",bestFor:"Ultra-high-volume workers, bulk processing",catch:"Lighter model, not for complex tasks",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-hy3",provider:"OpenCode",product:"OpenCode Go",model:"HY3",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:21500,value:"6x",role:"orchestration",rating:"excellent",score:89,why:"Cheapest orchestration model available",bestFor:"Agent orchestration, multi-step workflows",catch:"Specialist role",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-deepseek-v4-flash",provider:"OpenCode",product:"OpenCode Go",model:"DeepSeek V4 Flash",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:37800,value:"6x",role:"balanced",rating:"excellent",score:87,why:"Strong all-rounder with good volume",bestFor:"Balanced coding and reasoning",catch:"Not cheapest per-request",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-kimi-k2.7-code",provider:"OpenCode",product:"OpenCode Go",model:"Kimi K2.7 Code",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:6750,value:"6x",role:"coding",rating:"excellent",score:85,why:"Optimized for coding with vision support",bestFor:"Code generation, code review",catch:"Lower volume than general-purpose",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-qwen3.7-plus",provider:"OpenCode",product:"OpenCode Go",model:"Qwen 3.7 Plus",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:21600,value:"6x",role:"balanced",rating:"good",score:78,why:"Solid mid-range model with good volume",bestFor:"General development, analysis",catch:"Mid-tier capability",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-minimax-m3",provider:"OpenCode",product:"OpenCode Go",model:"MiniMax M3",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:16000,value:"6x",role:"balanced",rating:"good",score:76,why:"Good balance of capability and volume",bestFor:"General tasks, balanced workload",catch:"Less well-known model",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-deepseek-v4-pro",provider:"OpenCode",product:"OpenCode Go",model:"DeepSeek V4 Pro",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:5200,value:"6x",role:"reasoning",rating:"good",score:75,why:"Strong reasoning model at reasonable volume",bestFor:"Complex analysis, reasoning tasks",catch:"Higher cost per request",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-gpt-5.6-luna",provider:"OpenCode",product:"OpenCode Go",model:"GPT-5.6 Luna",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:10250,value:"6x",role:"balanced",rating:"good",score:73,why:"GPT quality at Go prices",bestFor:"General-purpose, trusted model",catch:"Higher cost per request",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-glm-5.3",provider:"OpenCode",product:"OpenCode Go",model:"GLM 5.3",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:1080,value:"6x",role:"premium_reasoning",rating:"niche",score:65,why:"Premium reasoning at limited volume",bestFor:"Specialized reasoning tasks",catch:"Very low request volume",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-kimi-k3",provider:"OpenCode",product:"OpenCode Go",model:"Kimi K3",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:490,value:"6x",role:"premium_reasoning",rating:"niche",score:60,why:"Latest Kimi at premium pricing",bestFor:"Cutting-edge reasoning",catch:"Extremely low volume",source:"https://opencode.ai/docs/go/"},
-  {slug:"opencode-go-grok-4.5",provider:"OpenCode",product:"OpenCode Go",model:"Grok 4.5",deal_type:"subscription",price_intro:5,price_recurring:10,allowance:60,requests:600,value:"6x",role:"premium_reasoning",rating:"niche",score:58,why:"Grok quality but very limited volume",bestFor:"Grok-specific tasks",catch:"Lowest volume on the platform",source:"https://opencode.ai/docs/go/"},
-  {id:"cloudflare-workers-free",slug:"cloudflare-workers-free",provider:"Cloudflare",product:"Workers AI Free",model:"Various",deal_type:"free",price_intro:0,price_recurring:0,allowance:null,requests:null,value:"$3.30/mo",role:"edge",rating:"good",score:72,why:"10K neurons/day free, $3.30/mo equivalent",bestFor:"Edge inference, prototyping",catch:"Requires Cloudflare ecosystem",source:"https://developers.cloudflare.com/workers-ai/platform/pricing/"},
-  {id:"gemini-free",slug:"gemini-free",provider:"Google AI",product:"Gemini API Free",model:"Gemini models",deal_type:"free",price_intro:0,price_recurring:0,allowance:null,requests:null,value:"Free",role:"general",rating:"good",score:75,why:"Free tier with huge context windows",bestFor:"Experimentation, learning",catch:"Dynamic quotas",source:"https://ai.google.dev/gemini-api/docs/pricing"},
-  {id:"groq-free",slug:"groq-free",provider:"Groq",product:"GroqCloud Free",model:"Various",deal_type:"free",price_intro:0,price_recurring:0,allowance:null,requests:null,value:"Free",role:"fast",rating:"good",score:74,why:"Very fast inference with free tier",bestFor:"Fast inference, testing",catch:"Rate limits",source:"https://console.groq.com/docs/rate-limits"},
-  {id:"openrouter-free",slug:"openrouter-free",provider:"OpenRouter",product:"OpenRouter Free",model:"25+ free models",deal_type:"free",price_intro:0,price_recurring:0,allowance:null,requests:50,value:"50 RPD",role:"multi",rating:"good",score:70,why:"50 free requests/day on 25+ models",bestFor:"Multi-model access, comparison",catch:"Limited to free models",source:"https://openrouter.ai/pricing"},
-  {id:"openrouter-unlock",slug:"openrouter-unlock",provider:"OpenRouter",product:"OpenRouter Funded",model:"Free models",deal_type:"unlock",price_intro:10,price_recurring:0,allowance:null,requests:1000,value:"20x",role:"multi",rating:"good",score:70,why:"$10 balance unlocks 1000 RPD",bestFor:"Heavy free-model usage",catch:"Only free models",source:"https://openrouter.ai/pricing"},
-  {id:"cerebras-trial",slug:"cerebras-trial",provider:"Cerebras",product:"Cerebras Trial",model:"All Cerebras",deal_type:"promo",price_intro:5,price_recurring:0,allowance:null,requests:null,value:"$5 credit",role:"trial",rating:"niche",score:55,why:"$5 free credit to try Cerebras",bestFor:"Trying Cerebras hardware",catch:"Expires 30 days",source:"https://www.cerebras.ai/pricing"},
-  {id:"hf-free",slug:"hf-free",provider:"Hugging Face",product:"HF Inference Free",model:"Various",deal_type:"free",price_intro:0,price_recurring:0,allowance:null,requests:null,value:"$0.10/mo",role:"general",rating:"niche",score:50,why:"$0.10/month inference credit",bestFor:"HuggingFace ecosystem users",catch:"Very small credit",source:"https://huggingface.co/docs/inference-providers/pricing"},
-  {id:"copilot-pro",slug:"copilot-pro",provider:"GitHub",product:"Copilot Pro",model:"Multiple",deal_type:"subscription",price_intro:10,price_recurring:10,allowance:15,requests:null,value:"1.5x",role:"ide",rating:"niche",score:65,why:"1500 credits + unlimited completions",bestFor:"IDE integration, code completion",catch:"Credits for chat only",source:"https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing"},
-  {id:"copilot-pro-plus",slug:"copilot-pro-plus",provider:"GitHub",product:"Copilot Pro+",model:"Multiple",deal_type:"subscription",price_intro:39,price_recurring:39,allowance:70,requests:null,value:"1.8x",role:"ide",rating:"niche",score:60,why:"7000 credits for heavy IDE users",bestFor:"Power users, team leads",catch:"Expensive for casual use",source:"https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing"},
-  {id:"copilot-max",slug:"copilot-max",provider:"GitHub",product:"Copilot Max",model:"Multiple",deal_type:"subscription",price_intro:100,price_recurring:100,allowance:200,requests:null,value:"2x",role:"ide",rating:"niche",score:55,why:"20000 credits for max usage",bestFor:"Enterprise, heavy teams",catch:"Very expensive",source:"https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing"},
-  {id:"mistral-free",slug:"mistral-free",provider:"Mistral",product:"Mistral API Free",model:"Mistral models",deal_type:"free",price_intro:0,price_recurring:0,allowance:null,requests:null,value:"Free",role:"general",rating:"niche",score:45,why:"Included monthly API usage",bestFor:"Mistral model users",catch:"Quota account-specific",source:"https://docs.mistral.ai/admin/billing-usage/usage-limits"},
-];
+const rows = derived.deals.map(d => ({
+  slug:d.slug, title:d.title, model:d.model, provider:d.provider,
+  deal_type:d.deal_type, label:d.label,
+  price_recurring:d.price_recurring_usd ?? 0, price_intro:d.price_intro_usd ?? 0,
+  requests:d.requests_per_month, value:d.ongoing_value_multiple ? `${d.ongoing_value_multiple}x` : (d.badges.includes('Free') ? 'Free' : '—'),
+  rating:d.rating, score:d.rank_score, overall:d.scores.profiles.overall,
+  badges:d.badges, why:d.why_good,
+}));
 ---
 <Base title="All Deals - LLMDeals">
   <section class="hero">
     <div class="eyebrow">Complete database</div>
     <h1>All AI deals</h1>
-    <p class="subtitle">${deals.length} deals across 9 providers. Searchable and filterable.</p>
+    <p class="subtitle">{rows.length} deal routes across {derived.counts.providers} providers. Every row links to full analysis with the math and evidence.</p>
   </section>
 
   <div class="toolbar">
     <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <input type="search" id="q" placeholder="Search model, provider, or deal..." />
+      <input type="search" id="q" placeholder="Search model, provider..." />
       <select id="filter-type"><option value="">All types</option>
-        <option value="subscription">Subscription</option>
-        <option value="free">Free</option>
-        <option value="promo">Promo</option>
-        <option value="unlock">Unlock</option>
+        <option value="subscription">Subscription</option><option value="free">Free</option>
+        <option value="promo">Promo</option><option value="unlock">Unlock</option>
       </select>
       <select id="filter-rating"><option value="">All ratings</option>
-        <option value="exceptional">Exceptional</option>
-        <option value="excellent">Excellent</option>
-        <option value="good">Good</option>
-        <option value="niche">Niche</option>
+        <option value="exceptional">Exceptional</option><option value="excellent">Excellent</option>
+        <option value="good">Good</option><option value="niche">Niche</option>
       </select>
     </div>
     <div class="stats" id="stats"></div>
@@ -55,80 +35,64 @@ const deals = [
 
   <div class="table-wrap">
     <table>
-      <thead>
-        <tr>
-          <th data-col="score" data-num>Score</th>
-          <th data-col="model">Model / Product</th>
-          <th data-col="provider">Provider</th>
-          <th data-col="deal_type">Type</th>
-          <th data-col="price">Price</th>
-          <th data-col="value">Value</th>
-          <th data-col="rating">Rating</th>
-        </tr>
-      </thead>
+      <thead><tr>
+        <th data-col="overall" data-num>Score</th>
+        <th>Deal</th>
+        <th>Provider</th>
+        <th data-col="label">Type</th>
+        <th data-col="price" data-num>Price</th>
+        <th>Value</th>
+        <th data-col="rating">Rating</th>
+      </tr></thead>
       <tbody id="tbody"></tbody>
     </table>
   </div>
 
-  <script define:vars={{ deals: JSON.stringify(deals) }}>
-    const all = JSON.parse(deals);
-    let sort = {col:'score', dir:'desc'};
+  <script define:vars={{ rows: JSON.stringify(rows) }}>
+    const all = JSON.parse(rows);
+    let sort = {col:'overall', dir:'desc'};
     let filtered = [...all];
+
+    const rc = {exceptional:'var(--accent)',excellent:'var(--blue)',good:'var(--yellow)',niche:'var(--text-dim)'};
+    const tl = {subscription:'Subscription',free:'Free',promo:'Promo',unlock:'Unlock'};
 
     function render() {
       const tbody = document.getElementById('tbody');
       if (!tbody) return;
-
       const q = (document.getElementById('q')?.value||'').toLowerCase();
       const ft = document.getElementById('filter-type')?.value||'';
       const fr = document.getElementById('filter-rating')?.value||'';
-
       filtered = all.filter(d => {
-        if (q && !(d.model+d.provider+d.product+d.why+d.bestFor).toLowerCase().includes(q)) return false;
+        if (q && !(d.title+d.provider+(d.why||'')+d.badges.join(' ')).toLowerCase().includes(q)) return false;
         if (ft && d.deal_type !== ft) return false;
         if (fr && d.rating !== fr) return false;
         return true;
       });
-
       filtered.sort((a,b) => {
-        let va = a[sort.col], vb = b[sort.col];
-        if (typeof va === 'string') return sort.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
-        return sort.dir === 'asc' ? (va||0)-(vb||0) : (vb||0)-(va||0);
+        let va=a[sort.col]??-1, vb=b[sort.col]??-1;
+        if (typeof va === 'string') return sort.dir==='asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+        return sort.dir==='asc' ? va-vb : vb-va;
       });
-
-      const ratingColors = {exceptional:'var(--accent)',excellent:'var(--blue)',good:'var(--yellow)',niche:'var(--text-dim)'};
-      const typeLabels = {subscription:'Subscription',free:'Free',promo:'Promo',unlock:'Unlock'};
-
-      tbody.innerHTML = filtered.map(d => `<tr style="cursor:pointer" onclick="window.location='/deals/${d.slug||d.id}'">
-        <td class="price" style="color:var(--accent);font-size:16px;font-weight:800">${d.score||'—'}</td>
-        <td><div class="model-name">${d.model}</div><div class="model-sub">${d.product}</div></td>
+      tbody.innerHTML = filtered.map(d => `<tr style="cursor:pointer" onclick="window.location='/deals/${d.slug}'">
+        <td class="price" style="color:${d.score?'var(--accent)':'var(--text-dim)'};font-weight:800">${d.score??'—'}</td>
+        <td><div class="model-name">${d.title}</div>${d.badges.map(b=>`<span class="badge badge-type" style="margin:3px 3px 0 0">${b}</span>`).join('')}</td>
         <td style="font-size:12px;color:var(--text-dim)">${d.provider}</td>
-        <td><span class="badge badge-deal">${typeLabels[d.deal_type]||d.deal_type}</span></td>
-        <td style="font-size:12px">${d.price_recurring > 0 ? '$'+d.price_recurring+'/mo' : d.price_intro > 0 ? '$'+d.price_intro+' intro' : 'Free'}</td>
+        <td><span class="badge badge-deal">${tl[d.deal_type]||d.deal_type}</span></td>
+        <td style="font-size:12px">${d.price_recurring > 0 ? '$'+d.price_recurring+'/mo' : d.price_intro > 0 ? '$'+d.price_intro : 'Free'}</td>
         <td><span class="badge badge-verified">${d.value}</span></td>
-        <td><span style="color:${ratingColors[d.rating]||'var(--text-dim)'};font-size:12px;font-weight:600;text-transform:capitalize">${d.rating}</span></td>
+        <td><span style="color:${rc[d.rating]||'var(--text-dim)'};font-size:12px;font-weight:600;text-transform:capitalize">${d.rating}</span></td>
       </tr>`).join('');
-
-      document.getElementById('stats').textContent = `${filtered.length} deals`;
-      document.querySelectorAll('th[data-col]').forEach(th => {
-        th.classList.remove('sorted-asc','sorted-desc');
-        if (th.dataset.col === sort.col) th.classList.add('sorted-'+sort.dir);
-      });
+      document.getElementById('stats').textContent = filtered.length + ' deals';
     }
-
-    document.querySelectorAll('th[data-col]').forEach(th => {
-      th.addEventListener('click', () => {
-        const col = th.dataset.col;
-        if (sort.col === col) sort.dir = sort.dir === 'asc' ? 'desc' : 'asc';
-        else { sort.col = col; sort.dir = col === 'score' ? 'desc' : 'asc'; }
-        render();
-      });
-    });
-
+    document.querySelectorAll('th[data-col]').forEach(th => th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (sort.col === col) sort.dir = sort.dir==='asc'?'desc':'asc';
+      else { sort.col = col; sort.dir = 'desc'; }
+      render();
+    }));
     document.getElementById('q')?.addEventListener('input', render);
     document.getElementById('filter-type')?.addEventListener('change', render);
     document.getElementById('filter-rating')?.addEventListener('change', render);
-
     render();
   </script>
 </Base>

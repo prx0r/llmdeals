@@ -473,7 +473,7 @@
       "family": "GPT",
       "ctx": "128K",
       "in_per_m": 0.25,
-      "out_per_m": 1.0,
+      "out_per_m": 1,
       "cache_per_m": 0.025,
       "tools": true,
       "vision": true,
@@ -525,7 +525,7 @@
       "family": "Grok",
       "ctx": "128K",
       "in_per_m": 0.5,
-      "out_per_m": 2.0,
+      "out_per_m": 2,
       "cache_per_m": 0.05,
       "tools": true,
       "vision": true,
@@ -689,7 +689,7 @@
         "bulk processing"
       ],
       "why_good": "Highest request volume of any model on OpenCode Go at ~226K/month. Excellent for tasks that need many cheap, fast completions.",
-      "catch": "Muse Spark is a lighter model \u2014 not ideal for complex reasoning or code generation.",
+      "catch": "Muse Spark is a lighter model — not ideal for complex reasoning or code generation.",
       "confidence": "high",
       "assessed_at": "2026-08-23T00:00:00Z"
     },
@@ -703,7 +703,7 @@
         "routing"
       ],
       "why_good": "~21.5K requests/month at $10/mo makes this one of the cheapest orchestration models available. HY3 excels at planning and delegation.",
-      "catch": "Specialist role \u2014 not a general-purpose coding model.",
+      "catch": "Specialist role — not a general-purpose coding model.",
       "confidence": "high",
       "assessed_at": "2026-08-23T00:00:00Z"
     },
