@@ -1,0 +1,197 @@
+---
+import Base from '../layouts/Base.astro';
+
+const allModels = [
+  {model:"MiMo V2.5",id:"mimo-v2.5",provider:"opencode",family:"MiMo",ctx:"131K",inP:0.14,outP:0.28,cacheP:0.0028,rpm:150400,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"Muse Spark 1.2",id:"muse-spark-1.2-contributor",provider:"opencode",family:"Muse",ctx:"128K",inP:0.10,outP:0.20,cacheP:null,rpm:226600,free:true,tools:false,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"DeepSeek V4 Flash",id:"deepseek-v4-flash",provider:"opencode",family:"DeepSeek",ctx:"128K",inP:0.14,outP:0.28,cacheP:0.014,rpm:37800,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"DeepSeek V4 Pro",id:"deepseek-v4-pro",provider:"opencode",family:"DeepSeek",ctx:"128K",inP:0.28,outP:0.56,cacheP:0.028,rpm:5200,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"Qwen 3.7 Plus",id:"qwen3.7-plus",provider:"opencode",family:"Qwen",ctx:"128K",inP:0.10,outP:0.20,cacheP:0.01,rpm:21600,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"Qwen 3.7 Max",id:"qwen3.7-max",provider:"opencode",family:"Qwen",ctx:"128K",inP:0.20,outP:0.40,cacheP:0.02,rpm:1690,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"Kimi K2.7 Code",id:"kimi-k2.7-code",provider:"opencode",family:"Kimi",ctx:"128K",inP:0.14,outP:0.28,cacheP:0.014,rpm:6750,free:true,tools:true,json:true,vision:true,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"Kimi K3",id:"kimi-k3",provider:"opencode",family:"Kimi",ctx:"128K",inP:0.28,outP:0.56,cacheP:0.028,rpm:490,free:true,tools:true,json:true,vision:true,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"GPT-5.6 Luna",id:"gpt-5.6-luna",provider:"opencode",family:"GPT",ctx:"128K",inP:0.25,outP:1.00,cacheP:0.025,rpm:10250,free:true,tools:true,json:true,vision:true,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"GLM 5.3",id:"glm-5.3",provider:"opencode",family:"GLM",ctx:"128K",inP:0.28,outP:0.56,cacheP:0.028,rpm:1080,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"HY3",id:"hy3",provider:"opencode",family:"HY",ctx:"128K",inP:0.10,outP:0.20,cacheP:0.01,rpm:21500,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"MiniMax M3",id:"minimax-m3",provider:"opencode",family:"MiniMax",ctx:"128K",inP:0.14,outP:0.28,cacheP:0.014,rpm:16000,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"Grok 4.5",id:"grok-4.5",provider:"opencode",family:"Grok",ctx:"128K",inP:0.50,outP:2.00,cacheP:0.05,rpm:600,free:true,tools:true,json:true,vision:true,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
+  {model:"Gemini 2.5 Flash",id:"gemini-2.5-flash",provider:"google_ai",family:"Gemini",ctx:"1M",inP:0.15,outP:0.60,cacheP:0.0375,rpm:null,free:true,tools:true,json:true,vision:true,deal:"Free tier",source:"https://ai.google.dev/gemini-api/docs/pricing"},
+  {model:"Gemini 2.5 Pro",id:"gemini-2.5-pro",provider:"google_ai",family:"Gemini",ctx:"1M",inP:1.25,outP:10.00,cacheP:0.3125,rpm:null,free:true,tools:true,json:true,vision:true,deal:"Free tier",source:"https://ai.google.dev/gemini-api/docs/pricing"},
+  {model:"GPT-OSS 120B",id:"openai/gpt-oss-120b",provider:"groq",family:"GPT",ctx:"8K",inP:0.15,outP:0.60,cacheP:null,rpm:30,free:true,tools:false,json:true,vision:false,deal:"Free tier",source:"https://console.groq.com/docs/rate-limits"},
+  {model:"Qwen 3.6 27B",id:"qwen/qwen3.6-27b",provider:"groq",family:"Qwen",ctx:"8K",inP:0.15,outP:0.60,cacheP:null,rpm:30,free:true,tools:false,json:true,vision:false,deal:"Free tier",source:"https://console.groq.com/docs/rate-limits"},
+  {model:"Llama 3.3 70B",id:"meta-llama/llama-3.3-70b-versatile",provider:"groq",family:"Llama",ctx:"128K",inP:0.06,outP:0.09,cacheP:null,rpm:30,free:true,tools:true,json:true,vision:false,deal:"Free tier",source:"https://console.groq.com/docs/rate-limits"},
+  {model:"DeepSeek V3 0324",id:"deepseek/deepseek-chat-v3-0324",provider:"openrouter",family:"DeepSeek",ctx:"164K",inP:0.50,outP:1.50,cacheP:0.05,rpm:null,free:true,tools:true,json:true,vision:false,deal:"50 free req/day",source:"https://openrouter.ai/pricing"},
+  {model:"Llama 4 Maverick",id:"meta-llama/llama-4-maverick",provider:"openrouter",family:"Llama",ctx:"1M",inP:0.20,outP:0.60,cacheP:0.02,rpm:null,free:true,tools:true,json:true,vision:true,deal:"50 free req/day",source:"https://openrouter.ai/pricing"},
+  {model:"Gemma 3 27B",id:"google/gemma-3-27b-it",provider:"openrouter",family:"Gemma",ctx:"128K",inP:0.07,outP:0.07,cacheP:null,rpm:null,free:true,tools:false,json:true,vision:false,deal:"50 free req/day",source:"https://openrouter.ai/pricing"},
+];
+
+function blended(inP, outP) { return inP + outP * 3; }
+function priceClass(v) { return v === 0 ? 'price-free' : v < 1 ? 'price-low' : v < 5 ? 'price-mid' : 'price-high'; }
+function fmtP(v) { return v === 0 ? 'Free' : v < 0.01 ? `$${v.toFixed(4)}` : `$${v.toFixed(2)}`; }
+function dotClass(p) { return `dot-${p}`; }
+function providerLabel(p) {
+  const m = {opencode:'OpenCode',cloudflare:'Cloudflare',google_ai:'Google',groq:'Groq',openrouter:'OpenRouter',cerebras:'Cerebras',huggingface:'HuggingFace',github:'GitHub',mistral:'Mistral'};
+  return m[p] || p;
+}
+---
+<Base title="LLM Deals - Compare AI Model Pricing">
+  <div class="hero">
+    <div class="eyebrow">Compare AI API prices</div>
+    <h1>Find the cheapest route for every model</h1>
+    <p class="subtitle">Compare official API prices, subscription deals, and free tiers across 9 providers. All data verified from official sources.</p>
+  </div>
+
+  <div class="toolbar">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <input type="search" id="q" placeholder="Search model, provider, or family..." />
+      <select id="filter-provider"><option value="">All providers</option>
+        <option value="opencode">OpenCode</option><option value="google_ai">Google</option>
+        <option value="groq">Groq</option><option value="openrouter">OpenRouter</option>
+      </select>
+      <select id="filter-free"><option value="">All models</option>
+        <option value="free">Free tier only</option><option value="paid">Paid only</option>
+      </select>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <div class="table-wrap">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th data-col="model">Model</th>
+          <th data-col="provider">Provider</th>
+          <th data-col="family">Family</th>
+          <th data-col="ctx">Context</th>
+          <th data-col="inP" data-num>Input $/M</th>
+          <th data-col="outP" data-num>Output $/M</th>
+          <th data-col="blended" data-num>Blended</th>
+          <th data-col="rpm" data-num>Req/Mo</th>
+          <th data-col="features">Features</th>
+          <th data-col="deal">Deal</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-gap">
+    <h2>Top subscription deals</h2>
+    <p class="subtitle" style="margin-bottom:20px">Deterministic economics from verified provider facts. No LLM inference.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">
+      <div class="deal-card">
+        <div class="deal-provider"><span class="provider-badge"><span class="provider-dot dot-opencode"></span>OpenCode</span></div>
+        <div class="deal-title" style="margin-top:8px">OpenCode Go</div>
+        <div class="deal-terms">$5 first month, then $10/mo. $60/mo usage pool across 21+ models.</div>
+        <div class="deal-value">6x</div>
+        <div class="deal-meta"><span class="badge badge-deal">subscription_usage_pool</span><span>intro: 12x</span><span>renewal: 6x</span></div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-provider"><span class="provider-badge"><span class="provider-dot dot-cloudflare"></span>Cloudflare</span></div>
+        <div class="deal-title" style="margin-top:8px">Workers AI Free</div>
+        <div class="deal-terms">10,000 neurons/day free. $0.011/1K neurons if you exceed.</div>
+        <div class="deal-value">$3.30<span style="font-size:14px;color:var(--text-muted)">/mo equiv.</span></div>
+        <div class="deal-meta"><span class="badge badge-free">recurring_free_quota</span><span>resets daily</span></div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-provider"><span class="provider-badge"><span class="provider-dot dot-github"></span>GitHub</span></div>
+        <div class="deal-title" style="margin-top:8px">Copilot Pro / Pro+ / Max</div>
+        <div class="deal-terms">$10=1,500 credits (1.5x), $39=7,000 (1.8x), $100=20,000 (2x). Unlimited completions included.</div>
+        <div class="deal-value">1.5-2x</div>
+        <div class="deal-meta"><span class="badge badge-deal">subscription_credit_pool</span><span>1 credit = $0.01</span></div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-provider"><span class="provider-badge"><span class="provider-dot dot-openrouter"></span>OpenRouter</span></div>
+        <div class="deal-title" style="margin-top:8px">Free + Funded Unlock</div>
+        <div class="deal-terms">50 free req/day. Add $10 balance (spendable) to unlock 1,000 req/day on free models.</div>
+        <div class="deal-value">20x<span style="font-size:14px;color:var(--text-muted)"> free quota</span></div>
+        <div class="deal-meta"><span class="badge badge-type">balance_threshold_unlock</span><span>balance doesn't expire</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ allModels: JSON.stringify(allModels) }}>
+    const models = JSON.parse(allModels);
+    let sort = {col:'blended', dir:'asc'};
+    let filtered = [...models];
+
+    function blended(inP, outP) { return inP + outP * 3; }
+    function priceClass(v) { return v === 0 ? 'price-free' : v < 1 ? 'price-low' : v < 5 ? 'price-mid' : 'price-high'; }
+    function fmtP(v) { return v === 0 ? 'Free' : v < 0.01 ? '$'+v.toFixed(4) : '$'+v.toFixed(2); }
+    function dotClass(p) { return 'dot-'+p; }
+    function providerLabel(p) {
+      return {opencode:'OpenCode',cloudflare:'Cloudflare',google_ai:'Google',groq:'Groq',openrouter:'OpenRouter'}[p]||p;
+    }
+
+    function render() {
+      const tbody = document.getElementById('tbody');
+      if (!tbody) return;
+
+      const q = (document.getElementById('q')?.value||'').toLowerCase();
+      const fp = document.getElementById('filter-provider')?.value||'';
+      const ff = document.getElementById('filter-free')?.value||'';
+
+      filtered = models.filter(m => {
+        if (q && !(m.model+m.id+m.provider+m.family+m.deal).toLowerCase().includes(q)) return false;
+        if (fp && m.provider !== fp) return false;
+        if (ff === 'free' && !m.free) return false;
+        if (ff === 'paid' && m.free) return false;
+        return true;
+      });
+
+      filtered.sort((a,b) => {
+        let va, vb;
+        if (sort.col === 'blended') { va = blended(a.inP, a.outP); vb = blended(b.inP, b.outP); }
+        else if (sort.col === 'rpm') { va = a.rpm||999999; vb = b.rpm||999999; }
+        else if (['inP','outP'].includes(sort.col)) { va = a[sort.col]; vb = b[sort.col]; }
+        else { va = a[sort.col]||''; vb = b[sort.col]||''; }
+        if (typeof va === 'string') return sort.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+        return sort.dir === 'asc' ? va-vb : vb-va;
+      });
+
+      tbody.innerHTML = filtered.map(m => {
+        const bl = blended(m.inP, m.outP);
+        const features = [];
+        if (m.tools) features.push('<span class="badge badge-verified">Tools</span>');
+        if (m.vision) features.push('<span class="badge badge-verified">Vision</span>');
+        if (m.json) features.push('<span class="badge badge-verified">JSON</span>');
+        const dealBadge = m.free ? '<span class="badge badge-free">Free</span>' : '';
+        return `<tr>
+          <td><div class="model-name">${m.model}</div><div class="model-sub">${m.id}</div></td>
+          <td><span class="provider-badge"><span class="provider-dot ${dotClass(m.provider)}"></span>${providerLabel(m.provider)}</span></td>
+          <td style="color:var(--text-dim);font-size:12px">${m.family}</td>
+          <td style="font-size:12px">${m.ctx}</td>
+          <td class="price ${priceClass(m.inP)}">${fmtP(m.inP)}</td>
+          <td class="price ${priceClass(m.outP)}">${fmtP(m.outP)}</td>
+          <td class="price ${priceClass(bl)}"><strong>${fmtP(bl)}</strong></td>
+          <td style="font-size:12px;font-variant-numeric:tabular-nums">${m.rpm ? m.rpm.toLocaleString() : '—'}</td>
+          <td>${features.join(' ')}</td>
+          <td>${dealBadge} <span style="font-size:11px;color:var(--text-dim)">${m.deal}</span></td>
+        </tr>`;
+      }).join('');
+
+      const provCount = new Set(filtered.map(m=>m.provider)).size;
+      document.getElementById('stats').textContent = `${filtered.length} models · ${provCount} providers`;
+
+      document.querySelectorAll('th[data-col]').forEach(th => {
+        th.classList.remove('sorted-asc','sorted-desc');
+        if (th.dataset.col === sort.col) th.classList.add('sorted-'+sort.dir);
+      });
+    }
+
+    document.querySelectorAll('th[data-col]').forEach(th => {
+      th.addEventListener('click', () => {
+        const col = th.dataset.col;
+        if (sort.col === col) sort.dir = sort.dir === 'asc' ? 'desc' : 'asc';
+        else { sort.col = col; sort.dir = 'asc'; }
+        render();
+      });
+    });
+
+    document.getElementById('q')?.addEventListener('input', render);
+    document.getElementById('filter-provider')?.addEventListener('change', render);
+    document.getElementById('filter-free')?.addEventListener('change', render);
+
+    render();
+  </script>
+</Base>

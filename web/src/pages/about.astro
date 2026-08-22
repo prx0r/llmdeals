@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="About - LLM Deals">
+  <div class="hero">
+    <div class="eyebrow">About</div>
+    <h1>How it works</h1>
+    <p class="lead">LLM Deals provides verified pricing data for AI models, helping you find the best value.</p>
+  </div>
+
+  <div class="content">
+    <section class="section">
+      <h2>Verified Pricing</h2>
+      <p>All pricing data is collected directly from official provider websites and documentation. We verify each price point against official sources before including it in our database.</p>
+    </section>
+
+    <section class="section">
+      <h2>Deal Analysis</h2>
+      <p>We analyze subscription deals, credits, and promotions to calculate effective token prices. This means you can compare deals across different pricing models - from pay-as-you-go to subscription credits.</p>
+    </section>
+
+    <section class="section">
+      <h2>OpenCode Go Integration</h2>
+      <p>LLM Deals integrates with OpenCode Go to provide real-time pricing for their managed API. OpenCode Go offers a $10/month subscription with $60 of included usage across multiple AI models.</p>
+    </section>
+
+    <section class="section">
+      <h2>Data Freshness</h2>
+      <p>We regularly check provider websites for pricing updates. Each data point includes when it was last verified, so you know how current the information is.</p>
+    </section>
+  </div>
+
+  <style>
+    .content {
+      max-width: 800px;
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+  </style>
+</Base>

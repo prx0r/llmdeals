@@ -1,0 +1,1 @@
+cargo:rustc-env=MIME_TYPES_GENERATED_PATH=/root/llmdeals/target/release/build/mime_guess-66bf4b5b82ba090d/out/mime_types_generated.rs

@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+
+const derivations = [
+  {id:"opencode_go_intro_multiple",offer:"OpenCode Go",metric:"nominal_usage_pool_multiple",value:12,unit:"x",inputs:"$60 pool / $5 intro"},
+  {id:"opencode_go_renewal_multiple",offer:"OpenCode Go",metric:"nominal_usage_pool_multiple",value:6,unit:"x",inputs:"$60 pool / $10 renewal"},
+  {id:"cloudflare_free_30d",offer:"Cloudflare Workers AI",metric:"free_allocation_reference_value_30d",value:3.3,unit:"USD/30d",inputs:"10K neurons/day x $0.011/1K x 30"},
+  {id:"copilot_pro_ai_value",offer:"GitHub Copilot Pro",metric:"included_metered_ai_value_usd",value:15,unit:"USD/mo",inputs:"1500 credits x $0.01"},
+  {id:"copilot_pro_multiple",offer:"GitHub Copilot Pro",metric:"included_metered_ai_value_multiple",value:1.5,unit:"x",inputs:"$15 AI value / $10 sub"},
+  {id:"copilot_pro_plus_ai_value",offer:"GitHub Copilot Pro+",metric:"included_metered_ai_value_usd",value:70,unit:"USD/mo",inputs:"7000 credits x $0.01"},
+  {id:"copilot_pro_plus_multiple",offer:"GitHub Copilot Pro+",metric:"included_metered_ai_value_multiple",value:1.79,unit:"x",inputs:"$70 AI value / $39 sub"},
+  {id:"copilot_max_ai_value",offer:"GitHub Copilot Max",metric:"included_metered_ai_value_usd",value:200,unit:"USD/mo",inputs:"20000 credits x $0.01"},
+  {id:"copilot_max_multiple",offer:"GitHub Copilot Max",metric:"included_metered_ai_value_multiple",value:2,unit:"x",inputs:"$200 AI value / $100 sub"},
+];
+
+const typeRows = [
+  {type:"subscription_usage_pool",formula:"usage_pool / subscription_fee = value multiple",example:"OpenCode: $60/$10 = 6x"},
+  {type:"recurring_free_quota",formula:"free_units/1000 * reference_price * days",example:"CF: 10K neurons * $0.011/1K * 30 = $3.30"},
+  {type:"subscription_credit_pool",formula:"credits * value_per_credit / subscription",example:"Copilot: 1500 * $0.01 / $10 = 1.5x"},
+  {type:"balance_threshold_unlock",formula:"Balance remains spendable; unlocks higher free quota",example:"OpenRouter: $10 balance unlocks 1000 RPD"},
+  {type:"signup_credit",formula:"One-time credit, expires after N days",example:"Cerebras: $5, expires 30 days"},
+  {type:"recurring_free_request_quota",formula:"Fixed requests/day, no payment required",example:"OpenRouter: 50 RPD free"},
+  {type:"free_tier_dynamic_quota",formula:"Free; quota varies by model/project/account",example:"Gemini, Mistral"},
+];
+---
+<Base title="Economic Derivations - LLM Deals">
+  <div class="hero">
+    <div class="eyebrow">Deterministic calculations</div>
+    <h1>Economic derivations</h1>
+    <p class="lead">Every number here is computed from verified provider facts. No LLM inference. No approximation.</p>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr><th>Offer</th><th>Metric</th><th>Value</th><th>Formula Inputs</th></tr>
+      </thead>
+      <tbody set:html={derivations.map(d => `<tr><td><div class="model-name">${d.offer}</div></td><td style="font-size:13px;color:var(--text-muted)">${d.metric}</td><td class="price price-input">${d.value}${d.unit}</td><td style="font-size:12px;color:var(--text-muted)">${d.inputs}</td></tr>`).join('')} />
+    </table>
+  </div>
+
+  <h2 style="margin:48px 0 16px">Deal type definitions</h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr><th>Deal Type</th><th>Formula</th><th>Example</th></tr>
+      </thead>
+      <tbody set:html={typeRows.map(r => `<tr><td><span class="badge badge-true">${r.type}</span></td><td style="font-size:13px">${r.formula}</td><td style="font-size:13px">${r.example}</td></tr>`).join('')} />
+    </table>
+  </div>
+</Base>

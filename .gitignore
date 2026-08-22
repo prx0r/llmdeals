@@ -1,0 +1,6 @@
+target/
+web/dist/
+web/.astro/
+web/node_modules/
+*.db
+.env
