@@ -4,3 +4,4 @@ web/.astro/
 web/node_modules/
 *.db
 .env
+.wrangler/

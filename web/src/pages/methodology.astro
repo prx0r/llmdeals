@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Methodology - LLMDeals">
+  <section class="hero">
+    <div class="eyebrow">How we work</div>
+    <h1>Methodology</h1>
+    <p class="subtitle">How LLMDeals researches, verifies, and ranks AI deals.</p>
+  </section>
+
+  <div class="content">
+    <section class="section">
+      <h2>Our process</h2>
+      <div class="process-steps">
+        <div class="step"><div class="step-num">1</div><div class="step-title">Discovery</div><div class="step-desc">We monitor provider websites, pricing pages, and announcements for new deals, changes, and expirations.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-title">Verification</div><div class="step-desc">Every fact is traced to an official source. We capture evidence with URLs and timestamps.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-title">Normalization</div><div class="step-desc">We convert heterogeneous pricing models into comparable deal routes (offer × model combinations).</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-title">Assessment</div><div class="step-desc">We evaluate each deal route on economics, model quality, usability, and evidence confidence.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-title">Editorial</div><div class="step-desc">We write plain-language explanations of why each deal matters and who it's best for.</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Consumer ratings</h2>
+      <p>Every deal gets a rating based on its overall value proposition:</p>
+      <div class="rating-grid">
+        <div class="rating-card"><span class="rating-badge exceptional">Exceptional</span><span class="rating-desc">Outstanding value, highly recommended</span></div>
+        <div class="rating-card"><span class="rating-badge excellent">Excellent</span><span class="rating-desc">Strong value, worth using</span></div>
+        <div class="rating-card"><span class="rating-badge good">Good</span><span class="rating-desc">Solid option, meets needs</span></div>
+        <div class="rating-card"><span class="rating-badge niche">Niche</span><span class="rating-desc">Good for specific use cases</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Deal types</h2>
+      <p>We categorize deals into simple consumer labels:</p>
+      <div class="type-grid">
+        <div class="type-card"><span class="type-badge free">Free</span><span class="type-desc">Genuinely useful recurring free access</span></div>
+        <div class="type-card"><span class="type-badge subscription">Subscription</span><span class="type-desc">Pay monthly for discounted usage</span></div>
+        <div class="type-card"><span class="type-badge promo">Promo</span><span class="type-desc">Temporary discount or credit</span></div>
+        <div class="type-card"><span class="type-badge unlock">Unlock</span><span class="type-desc">Payment unlocks benefits</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Ranking formula</h2>
+      <p>Internal scores combine multiple factors:</p>
+      <pre>rank_score =
+  0.35 economic_advantage
++ 0.30 model_capability
++ 0.20 usability
++ 0.10 reliability
++ 0.05 evidence_confidence</pre>
+      <p style="margin-top:12px;font-size:13px;color:var(--text-dim)">Penalties apply for short expiry, severe rate limits, regional restrictions, difficult signup, dynamic/unknown quotas, and weak evidence.</p>
+    </section>
+
+    <section class="section">
+      <h2>What we don't do</h2>
+      <ul class="dont-list">
+        <li>We don't rank by affiliate commission</li>
+        <li>We don't certify providers</li>
+        <li>We don't claim a lower price automatically means a better route</li>
+        <li>We don't invent quotas or pricing we can't verify</li>
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .content { max-width: 800px; }
+  .section { margin-bottom: 48px; }
+  h2 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+  p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
+  .process-steps { display: grid; gap: 16px; }
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+  .step-num { width: 28px; height: 28px; border-radius: 8px; background: rgba(34,197,94,0.15); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+  .step-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+  .step-desc { font-size: 13px; color: var(--text-dim); }
+  .rating-grid, .type-grid { display: grid; gap: 8px; }
+  .rating-card, .type-card { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+  .rating-badge, .type-badge { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 5px; }
+  .rating-badge.exceptional { background: rgba(34,197,94,0.15); color: var(--accent); }
+  .rating-badge.excellent { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .rating-badge.good { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .rating-badge.niche { background: rgba(100,116,139,0.15); color: var(--text-dim); }
+  .type-badge.free { background: rgba(34,197,94,0.15); color: var(--accent); }
+  .type-badge.subscription { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .type-badge.promo { background: rgba(168,85,247,0.15); color: var(--purple); }
+  .type-badge.unlock { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .rating-desc, .type-desc { font-size: 13px; color: var(--text-dim); }
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; font-size: 12px; color: var(--text-muted); overflow-x: auto; }
+  .dont-list { margin: 0; padding: 0 0 0 18px; }
+  .dont-list li { font-size: 13px; color: var(--text-dim); margin-bottom: 6px; }
+</style>

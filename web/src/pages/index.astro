@@ -1,197 +1,156 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const allModels = [
-  {model:"MiMo V2.5",id:"mimo-v2.5",provider:"opencode",family:"MiMo",ctx:"131K",inP:0.14,outP:0.28,cacheP:0.0028,rpm:150400,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"Muse Spark 1.2",id:"muse-spark-1.2-contributor",provider:"opencode",family:"Muse",ctx:"128K",inP:0.10,outP:0.20,cacheP:null,rpm:226600,free:true,tools:false,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"DeepSeek V4 Flash",id:"deepseek-v4-flash",provider:"opencode",family:"DeepSeek",ctx:"128K",inP:0.14,outP:0.28,cacheP:0.014,rpm:37800,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"DeepSeek V4 Pro",id:"deepseek-v4-pro",provider:"opencode",family:"DeepSeek",ctx:"128K",inP:0.28,outP:0.56,cacheP:0.028,rpm:5200,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"Qwen 3.7 Plus",id:"qwen3.7-plus",provider:"opencode",family:"Qwen",ctx:"128K",inP:0.10,outP:0.20,cacheP:0.01,rpm:21600,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"Qwen 3.7 Max",id:"qwen3.7-max",provider:"opencode",family:"Qwen",ctx:"128K",inP:0.20,outP:0.40,cacheP:0.02,rpm:1690,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"Kimi K2.7 Code",id:"kimi-k2.7-code",provider:"opencode",family:"Kimi",ctx:"128K",inP:0.14,outP:0.28,cacheP:0.014,rpm:6750,free:true,tools:true,json:true,vision:true,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"Kimi K3",id:"kimi-k3",provider:"opencode",family:"Kimi",ctx:"128K",inP:0.28,outP:0.56,cacheP:0.028,rpm:490,free:true,tools:true,json:true,vision:true,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"GPT-5.6 Luna",id:"gpt-5.6-luna",provider:"opencode",family:"GPT",ctx:"128K",inP:0.25,outP:1.00,cacheP:0.025,rpm:10250,free:true,tools:true,json:true,vision:true,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"GLM 5.3",id:"glm-5.3",provider:"opencode",family:"GLM",ctx:"128K",inP:0.28,outP:0.56,cacheP:0.028,rpm:1080,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"HY3",id:"hy3",provider:"opencode",family:"HY",ctx:"128K",inP:0.10,outP:0.20,cacheP:0.01,rpm:21500,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"MiniMax M3",id:"minimax-m3",provider:"opencode",family:"MiniMax",ctx:"128K",inP:0.14,outP:0.28,cacheP:0.014,rpm:16000,free:true,tools:true,json:true,vision:false,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"Grok 4.5",id:"grok-4.5",provider:"opencode",family:"Grok",ctx:"128K",inP:0.50,outP:2.00,cacheP:0.05,rpm:600,free:true,tools:true,json:true,vision:true,deal:"OpenCode Go $10/mo",source:"https://opencode.ai/docs/go/"},
-  {model:"Gemini 2.5 Flash",id:"gemini-2.5-flash",provider:"google_ai",family:"Gemini",ctx:"1M",inP:0.15,outP:0.60,cacheP:0.0375,rpm:null,free:true,tools:true,json:true,vision:true,deal:"Free tier",source:"https://ai.google.dev/gemini-api/docs/pricing"},
-  {model:"Gemini 2.5 Pro",id:"gemini-2.5-pro",provider:"google_ai",family:"Gemini",ctx:"1M",inP:1.25,outP:10.00,cacheP:0.3125,rpm:null,free:true,tools:true,json:true,vision:true,deal:"Free tier",source:"https://ai.google.dev/gemini-api/docs/pricing"},
-  {model:"GPT-OSS 120B",id:"openai/gpt-oss-120b",provider:"groq",family:"GPT",ctx:"8K",inP:0.15,outP:0.60,cacheP:null,rpm:30,free:true,tools:false,json:true,vision:false,deal:"Free tier",source:"https://console.groq.com/docs/rate-limits"},
-  {model:"Qwen 3.6 27B",id:"qwen/qwen3.6-27b",provider:"groq",family:"Qwen",ctx:"8K",inP:0.15,outP:0.60,cacheP:null,rpm:30,free:true,tools:false,json:true,vision:false,deal:"Free tier",source:"https://console.groq.com/docs/rate-limits"},
-  {model:"Llama 3.3 70B",id:"meta-llama/llama-3.3-70b-versatile",provider:"groq",family:"Llama",ctx:"128K",inP:0.06,outP:0.09,cacheP:null,rpm:30,free:true,tools:true,json:true,vision:false,deal:"Free tier",source:"https://console.groq.com/docs/rate-limits"},
-  {model:"DeepSeek V3 0324",id:"deepseek/deepseek-chat-v3-0324",provider:"openrouter",family:"DeepSeek",ctx:"164K",inP:0.50,outP:1.50,cacheP:0.05,rpm:null,free:true,tools:true,json:true,vision:false,deal:"50 free req/day",source:"https://openrouter.ai/pricing"},
-  {model:"Llama 4 Maverick",id:"meta-llama/llama-4-maverick",provider:"openrouter",family:"Llama",ctx:"1M",inP:0.20,outP:0.60,cacheP:0.02,rpm:null,free:true,tools:true,json:true,vision:true,deal:"50 free req/day",source:"https://openrouter.ai/pricing"},
-  {model:"Gemma 3 27B",id:"google/gemma-3-27b-it",provider:"openrouter",family:"Gemma",ctx:"128K",inP:0.07,outP:0.07,cacheP:null,rpm:null,free:true,tools:false,json:true,vision:false,deal:"50 free req/day",source:"https://openrouter.ai/pricing"},
+const topDeals = [
+  {rank:1,title:"OpenCode Go + MiMo-V2.5",tagline:"Best overall deal right now",whatYouGet:"Pay $10/month, get $60 of API usage. That is $60 worth of MiMo-V2.5 coding model calls for every $10 you spend.",realNumbers:"MiMo-V2.5 gets you ~150,000 typical requests per month. First month is only $5.",howToGetIt:"Sign up at opencode.ai/go, subscribe to Go, start using MiMo-V2.5.",whyItsGood:"MiMo is a genuinely strong coding model. The usage allowance is 6x what you pay - unusual for any AI subscription.",catch:"OpenCode can change limits or model lineup at any time.",bestFor:"People who run coding agents or write a lot of code with AI.",source:"https://opencode.ai/docs/go/"},
+  {rank:2,title:"OpenCode Go + HY3",tagline:"Best for agent orchestration",whatYouGet:"Same $10/month plan, but HY3 is a cheaper-to-run model. You get ~21,500 requests/month of orchestration and planning.",realNumbers:"HY3 costs $0.10/M input vs MiMo at $0.14/M, so your $60 allowance stretches further.",howToGetIt:"Same Go subscription. Select HY3 as your model.",whyItsGood:"Best cheap orchestration model available. Great for routing tasks between other models.",catch:"HY3 is a specialist - not good for general coding.",bestFor:"Multi-agent systems, task routing, planning.",source:"https://opencode.ai/docs/go/"},
+  {rank:3,title:"Gemini API Free",tagline:"Best completely free option",whatYouGet:"Use Google Gemini models for free. Input and output are both $0. Access to models with up to 1M token context windows.",realNumbers:"No monthly fee. Free within your project rate limits. If you exceed, you pay standard rates.",howToGetIt:"Create a Google AI Studio account at ai.google.dev. Start using the API immediately.",whyItsGood:"Huge context windows (1M tokens) at zero cost. Hard to beat for experimentation.",catch:"Rate limits vary by model and project. Not guaranteed for production.",bestFor:"Learning, prototyping, experimenting with large contexts.",source:"https://ai.google.dev/gemini-api/docs/pricing"},
+  {rank:4,title:"GroqCloud Free",tagline:"Best speed at zero cost",whatYouGet:"Use Groq extremely fast inference hardware for free. Each model has its own rate limits (RPM, RPD, TPM).",realNumbers:"GPT-OSS 120B: 30 requests/min, 1,000/day. Llama 3.3 70B: 30 RPM, 1,000 RPD.",howToGetIt:"Sign up at console.groq.com. No credit card needed.",whyItsGood:"Fastest inference available. Good for testing or low-volume production.",catch:"Rate limits are tight. Not for heavy usage.",bestFor:"Speed-critical prototyping, model testing.",source:"https://console.groq.com/docs/rate-limits"},
+  {rank:5,title:"OpenRouter Free + Funded",tagline:"Best multi-model access",whatYouGet:"50 free requests/day on 25+ models. Add $10 (spendable credit, does not expire) to unlock 1,000 free-model requests/day.",realNumbers:"Free tier: 50 RPD. Funded tier: 1,000 RPD. Credit remains usable for paid models too.",howToGetIt:"Sign up at openrouter.ai. To unlock: add $10+ credit balance.",whyItsGood:"Access many models through one API. The $10 unlock is spendable, not a fee.",catch:"Free-model requests only. Paid models cost extra on top of your balance.",bestFor:"Comparing models, flexible routing, low-volume multi-model use.",source:"https://openrouter.ai/pricing"}
 ];
 
-function blended(inP, outP) { return inP + outP * 3; }
-function priceClass(v) { return v === 0 ? 'price-free' : v < 1 ? 'price-low' : v < 5 ? 'price-mid' : 'price-high'; }
-function fmtP(v) { return v === 0 ? 'Free' : v < 0.01 ? `$${v.toFixed(4)}` : `$${v.toFixed(2)}`; }
-function dotClass(p) { return `dot-${p}`; }
-function providerLabel(p) {
-  const m = {opencode:'OpenCode',cloudflare:'Cloudflare',google_ai:'Google',groq:'Groq',openrouter:'OpenRouter',cerebras:'Cerebras',huggingface:'HuggingFace',github:'GitHub',mistral:'Mistral'};
-  return m[p] || p;
+const allRoutes = [
+  {model:"MiMo V2.5",id:"mimo-v2.5",ctx:"131K",inP:0.14,outP:0.28,requests:150400,effIn:"$0.00093",effOut:"$0.00187",role:"bulk_executor",rating:"exceptional",score:96,note:"Best balance of quality, volume, and value"},
+  {model:"Muse Spark 1.2",id:"muse-spark-1.2",ctx:"128K",inP:0.10,outP:0.20,requests:226600,effIn:"$0.00044",effOut:"$0.00088",role:"bulk_executor",rating:"exceptional",score:93,note:"Highest volume, lighter model"},
+  {model:"HY3",id:"hy3",ctx:"128K",inP:0.10,outP:0.20,requests:21500,effIn:"$0.00465",effOut:"$0.00930",role:"orchestration",rating:"excellent",score:89,note:"Cheapest orchestration model"},
+  {model:"DeepSeek V4 Flash",id:"deepseek-v4-flash",ctx:"128K",inP:0.14,outP:0.28,requests:37800,effIn:"$0.00370",effOut:"$0.00741",role:"balanced",rating:"excellent",score:87,note:"Strong all-rounder"},
+  {model:"Kimi K2.7 Code",id:"kimi-k2.7-code",ctx:"128K",inP:0.14,outP:0.28,requests:6750,effIn:"$0.02074",effOut:"$0.04148",role:"coding",rating:"excellent",score:85,note:"Best for code generation"},
+  {model:"Qwen 3.7 Plus",id:"qwen3.7-plus",ctx:"128K",inP:0.10,outP:0.20,requests:21600,effIn:"$0.00463",effOut:"$0.00926",role:"balanced",rating:"good",score:78,note:"Solid mid-range"},
+  {model:"MiniMax M3",id:"minimax-m3",ctx:"128K",inP:0.14,outP:0.28,requests:16000,effIn:"$0.00625",effOut:"$0.01250",role:"balanced",rating:"good",score:76,note:"Good balance"},
+  {model:"DeepSeek V4 Pro",id:"deepseek-v4-pro",ctx:"128K",inP:0.28,outP:0.56,requests:5200,effIn:"$0.01923",effOut:"$0.03846",role:"reasoning",rating:"good",score:75,note:"Strong reasoning"},
+  {model:"GPT-5.6 Luna",id:"gpt-5.6-luna",ctx:"128K",inP:0.25,outP:1.00,requests:10250,effIn:"$0.00976",effOut:"$0.03902",role:"balanced",rating:"good",score:73,note:"GPT quality at Go prices"},
+  {model:"GLM 5.3",id:"glm-5.3",ctx:"128K",inP:0.28,outP:0.56,requests:1080,effIn:"$0.09259",effOut:"$0.18519",role:"premium_reasoning",rating:"niche",score:65,note:"Very low volume"},
+  {model:"Kimi K3",id:"kimi-k3",ctx:"128K",inP:0.28,outP:0.56,requests:490,effIn:"$0.20408",effOut:"$0.40816",role:"premium_reasoning",rating:"niche",score:60,note:"Lowest volume"},
+  {model:"Grok 4.5",id:"grok-4.5",ctx:"128K",inP:0.50,outP:2.00,requests:600,effIn:"$0.16667",effOut:"$0.66667",role:"premium_reasoning",rating:"niche",score:58,note:"Expensive, low volume"},
+];
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
+const dealCardsHtml = topDeals.map(d => `
+  <div class="deal-full">
+    <div class="deal-rank">#${d.rank}</div>
+    <div class="deal-body">
+      <div class="deal-head">
+        <h3 class="deal-title">${esc(d.title)}</h3>
+        <span class="deal-tagline">${esc(d.tagline)}</span>
+      </div>
+      <div class="deal-section"><div class="deal-section-label">What you get</div><div class="deal-section-text">${esc(d.whatYouGet)}</div></div>
+      <div class="deal-section"><div class="deal-section-label">Real numbers</div><div class="deal-section-text">${esc(d.realNumbers)}</div></div>
+      <div class="deal-section"><div class="deal-section-label">How to get it</div><div class="deal-section-text">${esc(d.howToGetIt)}</div></div>
+      <div class="deal-section"><div class="deal-section-label">Why it is good</div><div class="deal-section-text">${esc(d.whyItsGood)}</div></div>
+      <div class="deal-section"><div class="deal-section-label">What to watch out for</div><div class="deal-section-text deal-catch">${esc(d.catch)}</div></div>
+      <div class="deal-section"><div class="deal-section-label">Best for</div><div class="deal-section-text">${esc(d.bestFor)}</div></div>
+      <div class="deal-footer"><a href="${d.source}" target="_blank" rel="noopener" class="deal-link">Official source</a></div>
+    </div>
+  </div>
+`).join('');
 ---
-<Base title="LLM Deals - Compare AI Model Pricing">
-  <div class="hero">
-    <div class="eyebrow">Compare AI API prices</div>
-    <h1>Find the cheapest route for every model</h1>
-    <p class="subtitle">Compare official API prices, subscription deals, and free tiers across 9 providers. All data verified from official sources.</p>
-  </div>
+<Base title="LLMDeals - The best AI deals right now">
+  <section class="hero">
+    <div class="eyebrow">Deal intelligence for AI</div>
+    <h1>The best AI deals right now</h1>
+    <p class="subtitle">We research pricing, subscriptions, free tiers and promotions and tell you which ones are actually worth using. Updated August 23, 2026.</p>
+  </section>
 
-  <div class="toolbar">
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <input type="search" id="q" placeholder="Search model, provider, or family..." />
-      <select id="filter-provider"><option value="">All providers</option>
-        <option value="opencode">OpenCode</option><option value="google_ai">Google</option>
-        <option value="groq">Groq</option><option value="openrouter">OpenRouter</option>
-      </select>
-      <select id="filter-free"><option value="">All models</option>
-        <option value="free">Free tier only</option><option value="paid">Paid only</option>
-      </select>
+  <section style="margin-bottom:56px">
+    <div class="section-header">
+      <h2>Best current deals</h2>
+      <a href="/deals" class="see-all">View all deals</a>
     </div>
-    <div class="stats" id="stats"></div>
-  </div>
+    <div class="deal-list" set:html={dealCardsHtml} />
+  </section>
 
-  <div class="table-wrap">
-    <table id="main-table">
-      <thead>
-        <tr>
+  <section style="margin-top:56px">
+    <div class="section-header">
+      <h2>All OpenCode Go model routes</h2>
+      <span class="stats">12 routes - $10/month ($5 first month) - $60 usage pool</span>
+    </div>
+    <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px">
+      <strong>Score</strong> = overall value ranking (quality x volume x economics). 
+      <strong>Effective cost</strong> = what you actually pay per request after the $60 usage pool is applied.
+    </p>
+    <div class="toolbar">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input type="search" id="q" placeholder="Search models..." />
+        <select id="filter-role"><option value="">All roles</option>
+          <option value="bulk_executor">Bulk executor</option>
+          <option value="balanced">Balanced</option>
+          <option value="orchestration">Orchestration</option>
+          <option value="coding">Coding</option>
+          <option value="reasoning">Reasoning</option>
+          <option value="premium_reasoning">Premium reasoning</option>
+        </select>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table id="routes-table">
+        <thead><tr>
+          <th data-col="score" data-num title="Overall value: quality x volume x economics">Score</th>
           <th data-col="model">Model</th>
-          <th data-col="provider">Provider</th>
-          <th data-col="family">Family</th>
           <th data-col="ctx">Context</th>
-          <th data-col="inP" data-num>Input $/M</th>
-          <th data-col="outP" data-num>Output $/M</th>
-          <th data-col="blended" data-num>Blended</th>
-          <th data-col="rpm" data-num>Req/Mo</th>
-          <th data-col="features">Features</th>
-          <th data-col="deal">Deal</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-
-  <div class="section-gap">
-    <h2>Top subscription deals</h2>
-    <p class="subtitle" style="margin-bottom:20px">Deterministic economics from verified provider facts. No LLM inference.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">
-      <div class="deal-card">
-        <div class="deal-provider"><span class="provider-badge"><span class="provider-dot dot-opencode"></span>OpenCode</span></div>
-        <div class="deal-title" style="margin-top:8px">OpenCode Go</div>
-        <div class="deal-terms">$5 first month, then $10/mo. $60/mo usage pool across 21+ models.</div>
-        <div class="deal-value">6x</div>
-        <div class="deal-meta"><span class="badge badge-deal">subscription_usage_pool</span><span>intro: 12x</span><span>renewal: 6x</span></div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-provider"><span class="provider-badge"><span class="provider-dot dot-cloudflare"></span>Cloudflare</span></div>
-        <div class="deal-title" style="margin-top:8px">Workers AI Free</div>
-        <div class="deal-terms">10,000 neurons/day free. $0.011/1K neurons if you exceed.</div>
-        <div class="deal-value">$3.30<span style="font-size:14px;color:var(--text-muted)">/mo equiv.</span></div>
-        <div class="deal-meta"><span class="badge badge-free">recurring_free_quota</span><span>resets daily</span></div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-provider"><span class="provider-badge"><span class="provider-dot dot-github"></span>GitHub</span></div>
-        <div class="deal-title" style="margin-top:8px">Copilot Pro / Pro+ / Max</div>
-        <div class="deal-terms">$10=1,500 credits (1.5x), $39=7,000 (1.8x), $100=20,000 (2x). Unlimited completions included.</div>
-        <div class="deal-value">1.5-2x</div>
-        <div class="deal-meta"><span class="badge badge-deal">subscription_credit_pool</span><span>1 credit = $0.01</span></div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-provider"><span class="provider-badge"><span class="provider-dot dot-openrouter"></span>OpenRouter</span></div>
-        <div class="deal-title" style="margin-top:8px">Free + Funded Unlock</div>
-        <div class="deal-terms">50 free req/day. Add $10 balance (spendable) to unlock 1,000 req/day on free models.</div>
-        <div class="deal-value">20x<span style="font-size:14px;color:var(--text-muted)"> free quota</span></div>
-        <div class="deal-meta"><span class="badge badge-type">balance_threshold_unlock</span><span>balance doesn't expire</span></div>
-      </div>
+          <th data-col="inP" data-num title="Standard API price per million input tokens">List $/M In</th>
+          <th data-col="outP" data-num title="Standard API price per million output tokens">List $/M Out</th>
+          <th data-col="effIn" title="What you actually pay per request with Go $60 pool">Eff. Cost/Req In</th>
+          <th data-col="effOut" title="What you actually pay per request with Go $60 pool">Eff. Cost/Req Out</th>
+          <th data-col="requests" data-num title="Estimated requests per month on Go $60 pool">Req/Mo</th>
+          <th data-col="role">Role</th>
+          <th data-col="note">Why this rank</th>
+        </tr></thead>
+        <tbody id="routes-body"></tbody>
+      </table>
     </div>
-  </div>
+  </section>
 
-  <script define:vars={{ allModels: JSON.stringify(allModels) }}>
-    const models = JSON.parse(allModels);
-    let sort = {col:'blended', dir:'asc'};
-    let filtered = [...models];
-
-    function blended(inP, outP) { return inP + outP * 3; }
-    function priceClass(v) { return v === 0 ? 'price-free' : v < 1 ? 'price-low' : v < 5 ? 'price-mid' : 'price-high'; }
-    function fmtP(v) { return v === 0 ? 'Free' : v < 0.01 ? '$'+v.toFixed(4) : '$'+v.toFixed(2); }
-    function dotClass(p) { return 'dot-'+p; }
-    function providerLabel(p) {
-      return {opencode:'OpenCode',cloudflare:'Cloudflare',google_ai:'Google',groq:'Groq',openrouter:'OpenRouter'}[p]||p;
-    }
+  <script define:vars={{ allRoutes: JSON.stringify(allRoutes) }}>
+    const routes = JSON.parse(allRoutes);
+    let sort = {col:'score', dir:'desc'};
+    let filtered = [...routes];
 
     function render() {
-      const tbody = document.getElementById('tbody');
+      const tbody = document.getElementById('routes-body');
       if (!tbody) return;
-
       const q = (document.getElementById('q')?.value||'').toLowerCase();
-      const fp = document.getElementById('filter-provider')?.value||'';
-      const ff = document.getElementById('filter-free')?.value||'';
-
-      filtered = models.filter(m => {
-        if (q && !(m.model+m.id+m.provider+m.family+m.deal).toLowerCase().includes(q)) return false;
-        if (fp && m.provider !== fp) return false;
-        if (ff === 'free' && !m.free) return false;
-        if (ff === 'paid' && m.free) return false;
+      const fr = document.getElementById('filter-role')?.value||'';
+      filtered = routes.filter(r => {
+        if (q && !(r.model+r.role+r.note).toLowerCase().includes(q)) return false;
+        if (fr && r.role !== fr) return false;
         return true;
       });
-
       filtered.sort((a,b) => {
-        let va, vb;
-        if (sort.col === 'blended') { va = blended(a.inP, a.outP); vb = blended(b.inP, b.outP); }
-        else if (sort.col === 'rpm') { va = a.rpm||999999; vb = b.rpm||999999; }
-        else if (['inP','outP'].includes(sort.col)) { va = a[sort.col]; vb = b[sort.col]; }
-        else { va = a[sort.col]||''; vb = b[sort.col]||''; }
+        let va = a[sort.col], vb = b[sort.col];
         if (typeof va === 'string') return sort.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
         return sort.dir === 'asc' ? va-vb : vb-va;
       });
-
-      tbody.innerHTML = filtered.map(m => {
-        const bl = blended(m.inP, m.outP);
-        const features = [];
-        if (m.tools) features.push('<span class="badge badge-verified">Tools</span>');
-        if (m.vision) features.push('<span class="badge badge-verified">Vision</span>');
-        if (m.json) features.push('<span class="badge badge-verified">JSON</span>');
-        const dealBadge = m.free ? '<span class="badge badge-free">Free</span>' : '';
-        return `<tr>
-          <td><div class="model-name">${m.model}</div><div class="model-sub">${m.id}</div></td>
-          <td><span class="provider-badge"><span class="provider-dot ${dotClass(m.provider)}"></span>${providerLabel(m.provider)}</span></td>
-          <td style="color:var(--text-dim);font-size:12px">${m.family}</td>
-          <td style="font-size:12px">${m.ctx}</td>
-          <td class="price ${priceClass(m.inP)}">${fmtP(m.inP)}</td>
-          <td class="price ${priceClass(m.outP)}">${fmtP(m.outP)}</td>
-          <td class="price ${priceClass(bl)}"><strong>${fmtP(bl)}</strong></td>
-          <td style="font-size:12px;font-variant-numeric:tabular-nums">${m.rpm ? m.rpm.toLocaleString() : '—'}</td>
-          <td>${features.join(' ')}</td>
-          <td>${dealBadge} <span style="font-size:11px;color:var(--text-dim)">${m.deal}</span></td>
-        </tr>`;
-      }).join('');
-
-      const provCount = new Set(filtered.map(m=>m.provider)).size;
-      document.getElementById('stats').textContent = `${filtered.length} models · ${provCount} providers`;
-
+      const rc = {exceptional:'var(--accent)',excellent:'var(--blue)',good:'var(--yellow)',niche:'var(--text-dim)'};
+      tbody.innerHTML = filtered.map(r => `<tr>
+        <td class="price" style="color:var(--accent);font-size:16px;font-weight:800">${r.score}</td>
+        <td><div class="model-name">${r.model}</div><div class="model-sub">${r.id}</div></td>
+        <td style="font-size:12px;color:var(--text-dim)">${r.ctx}</td>
+        <td style="font-size:11px;font-variant-numeric:tabular-nums">$${r.inP}</td>
+        <td style="font-size:11px;font-variant-numeric:tabular-nums">$${r.outP}</td>
+        <td style="font-size:11px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600">${r.effIn}</td>
+        <td style="font-size:11px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600">${r.effOut}</td>
+        <td style="font-size:12px;font-variant-numeric:tabular-nums">${r.requests.toLocaleString()}</td>
+        <td style="font-size:11px;color:var(--text-dim)">${r.role.replace(/_/g,' ')}</td>
+        <td style="font-size:11px;color:var(--text-muted);max-width:180px">${r.note}</td>
+      </tr>`).join('');
       document.querySelectorAll('th[data-col]').forEach(th => {
         th.classList.remove('sorted-asc','sorted-desc');
         if (th.dataset.col === sort.col) th.classList.add('sorted-'+sort.dir);
       });
     }
-
     document.querySelectorAll('th[data-col]').forEach(th => {
       th.addEventListener('click', () => {
         const col = th.dataset.col;
         if (sort.col === col) sort.dir = sort.dir === 'asc' ? 'desc' : 'asc';
-        else { sort.col = col; sort.dir = 'asc'; }
+        else { sort.col = col; sort.dir = col === 'score' ? 'desc' : 'asc'; }
         render();
       });
     });
-
     document.getElementById('q')?.addEventListener('input', render);
-    document.getElementById('filter-provider')?.addEventListener('change', render);
-    document.getElementById('filter-free')?.addEventListener('change', render);
-
+    document.getElementById('filter-role')?.addEventListener('change', render);
     render();
   </script>
 </Base>
