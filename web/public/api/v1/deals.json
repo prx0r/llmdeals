@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T19:46:42.075Z",
+  "generated_at": "2026-08-22T20:09:23.318Z",
   "schema_version": "llmdeals.api.v1",
   "counts": {
     "providers": 9,
@@ -59,7 +59,18 @@
       },
       "badges": [
         "Tools"
-      ]
+      ],
+      "effective_value_multiple": 6,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.000399,
+      "mega": {
+        "score": 60,
+        "reasons": [
+          "150K req/mo quota",
+          "6x effective value"
+        ],
+        "category": "capacity_anomaly"
+      }
     },
     {
       "kind": "route",
@@ -110,7 +121,18 @@
           "research": 74
         }
       },
-      "badges": []
+      "badges": [],
+      "effective_value_multiple": 6.46,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.000285,
+      "mega": {
+        "score": 72,
+        "reasons": [
+          "227K req/mo quota",
+          "6.46x effective value"
+        ],
+        "category": "capacity_anomaly"
+      }
     },
     {
       "kind": "route",
@@ -131,10 +153,10 @@
       "role": "orchestration",
       "ongoing_value_multiple": 6,
       "intro_value_multiple": 12,
-      "effective_input_per_m": 0.01667,
-      "effective_output_per_m": 0.03333,
-      "list_input_per_m": 0.1,
-      "list_output_per_m": 0.2,
+      "effective_input_per_m": 0.02333,
+      "effective_output_per_m": 0.09667,
+      "list_input_per_m": 0.14,
+      "list_output_per_m": 0.58,
       "ctx": "128K",
       "rating": "excellent",
       "rank_score": 89,
@@ -151,19 +173,29 @@
       "affiliate_url": null,
       "scores": {
         "quality": 0.65,
-        "cost": 0.88,
+        "cost": 0.69,
         "reliability": 1,
         "throughput": 0.14,
         "profiles": {
-          "overall": 75,
-          "coding": 74,
-          "agentic": 69,
-          "research": 68
+          "overall": 68,
+          "coding": 68,
+          "agentic": 65,
+          "research": 63
         }
       },
       "badges": [
         "Tools"
-      ]
+      ],
+      "effective_value_multiple": 2.15,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.001,
+      "mega": {
+        "score": 20,
+        "reasons": [
+          "2.15x effective value"
+        ],
+        "category": "usage_multiplier"
+      }
     },
     {
       "kind": "route",
@@ -184,10 +216,10 @@
       "role": "balanced",
       "ongoing_value_multiple": 6,
       "intro_value_multiple": 12,
-      "effective_input_per_m": 0.02333,
-      "effective_output_per_m": 0.04667,
-      "list_input_per_m": 0.14,
-      "list_output_per_m": 0.28,
+      "effective_input_per_m": 0.03667,
+      "effective_output_per_m": 0.11,
+      "list_input_per_m": 0.22,
+      "list_output_per_m": 0.66,
       "ctx": "128K",
       "rating": "excellent",
       "rank_score": 87,
@@ -204,19 +236,23 @@
       "affiliate_url": null,
       "scores": {
         "quality": 0.6,
-        "cost": 0.84,
+        "cost": 0.63,
         "reliability": 1,
         "throughput": 0.25,
         "profiles": {
-          "overall": 73,
-          "coding": 72,
-          "agentic": 69,
-          "research": 67
+          "overall": 66,
+          "coding": 66,
+          "agentic": 64,
+          "research": 62
         }
       },
       "badges": [
         "Tools"
-      ]
+      ],
+      "effective_value_multiple": 3.32,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.000878,
+      "mega": null
     },
     {
       "kind": "route",
@@ -237,10 +273,10 @@
       "role": "coding",
       "ongoing_value_multiple": 6,
       "intro_value_multiple": 12,
-      "effective_input_per_m": 0.02333,
-      "effective_output_per_m": 0.04667,
-      "list_input_per_m": 0.14,
-      "list_output_per_m": 0.28,
+      "effective_input_per_m": 0.15833,
+      "effective_output_per_m": 0.66667,
+      "list_input_per_m": 0.95,
+      "list_output_per_m": 4,
       "ctx": "128K",
       "rating": "excellent",
       "rank_score": 85,
@@ -257,20 +293,30 @@
       "affiliate_url": null,
       "scores": {
         "quality": 0.85,
-        "cost": 0.84,
+        "cost": 0,
         "reliability": 1,
         "throughput": 0.04,
         "profiles": {
-          "overall": 79,
-          "coding": 80,
-          "agentic": 72,
-          "research": 72
+          "overall": 50,
+          "coding": 54,
+          "agentic": 51,
+          "research": 51
         }
       },
       "badges": [
         "Tools",
         "Vision"
-      ]
+      ],
+      "effective_value_multiple": 10.5,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.0156,
+      "mega": {
+        "score": 35,
+        "reasons": [
+          "10.5x effective value"
+        ],
+        "category": "usage_multiplier"
+      }
     },
     {
       "kind": "offer",
@@ -619,10 +665,10 @@
       "role": "reasoning",
       "ongoing_value_multiple": 6,
       "intro_value_multiple": 12,
-      "effective_input_per_m": 0.04667,
-      "effective_output_per_m": 0.09333,
-      "list_input_per_m": 0.28,
-      "list_output_per_m": 0.56,
+      "effective_input_per_m": 0.11,
+      "effective_output_per_m": 0.33,
+      "list_input_per_m": 0.66,
+      "list_output_per_m": 1.98,
       "ctx": "128K",
       "rating": "unrated",
       "rank_score": null,
@@ -635,19 +681,23 @@
       "affiliate_url": null,
       "scores": {
         "quality": 0.7,
-        "cost": 0.67,
+        "cost": 0,
         "reliability": 0.7,
         "throughput": 0.03,
         "profiles": {
-          "overall": 62,
-          "coding": 63,
-          "agentic": 56,
-          "research": 56
+          "overall": 39,
+          "coding": 42,
+          "agentic": 39,
+          "research": 39
         }
       },
       "badges": [
         "Tools"
-      ]
+      ],
+      "effective_value_multiple": 1.41,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.0027,
+      "mega": null
     },
     {
       "kind": "route",
@@ -668,10 +718,10 @@
       "role": "balanced",
       "ongoing_value_multiple": 6,
       "intro_value_multiple": 12,
-      "effective_input_per_m": 0.01667,
-      "effective_output_per_m": 0.03333,
-      "list_input_per_m": 0.1,
-      "list_output_per_m": 0.2,
+      "effective_input_per_m": 0.06667,
+      "effective_output_per_m": 0.26667,
+      "list_input_per_m": 0.4,
+      "list_output_per_m": 1.6,
       "ctx": "128K",
       "rating": "unrated",
       "rank_score": null,
@@ -684,19 +734,29 @@
       "affiliate_url": null,
       "scores": {
         "quality": 0.6,
-        "cost": 0.88,
+        "cost": 0.13,
         "reliability": 0.7,
         "throughput": 0.14,
         "profiles": {
-          "overall": 67,
-          "coding": 66,
-          "agentic": 60,
-          "research": 60
+          "overall": 41,
+          "coding": 43,
+          "agentic": 42,
+          "research": 41
         }
       },
       "badges": [
         "Tools"
-      ]
+      ],
+      "effective_value_multiple": 7.91,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.00366,
+      "mega": {
+        "score": 35,
+        "reasons": [
+          "7.91x effective value"
+        ],
+        "category": "usage_multiplier"
+      }
     },
     {
       "kind": "route",
@@ -717,10 +777,10 @@
       "role": "premium_reasoning",
       "ongoing_value_multiple": 6,
       "intro_value_multiple": 12,
-      "effective_input_per_m": 0.03333,
-      "effective_output_per_m": 0.06667,
-      "list_input_per_m": 0.2,
-      "list_output_per_m": 0.4,
+      "effective_input_per_m": 0.1,
+      "effective_output_per_m": 0.4,
+      "list_input_per_m": 0.6,
+      "list_output_per_m": 2.4,
       "ctx": "128K",
       "rating": "unrated",
       "rank_score": null,
@@ -733,19 +793,23 @@
       "affiliate_url": null,
       "scores": {
         "quality": 0.75,
-        "cost": 0.77,
+        "cost": 0,
         "reliability": 0.7,
         "throughput": 0.01,
         "profiles": {
-          "overall": 67,
-          "coding": 67,
-          "agentic": 59,
-          "research": 60
+          "overall": 40,
+          "coding": 44,
+          "agentic": 40,
+          "research": 40
         }
       },
       "badges": [
         "Tools"
-      ]
+      ],
+      "effective_value_multiple": 0.93,
+      "vs_payg": "worse",
+      "agent_cost_per_req": 0.0055,
+      "mega": null
     },
     {
       "kind": "route",
@@ -766,208 +830,10 @@
       "role": "premium_reasoning",
       "ongoing_value_multiple": 6,
       "intro_value_multiple": 12,
-      "effective_input_per_m": 0.04667,
-      "effective_output_per_m": 0.09333,
-      "list_input_per_m": 0.28,
-      "list_output_per_m": 0.56,
-      "ctx": "128K",
-      "rating": "unrated",
-      "rank_score": null,
-      "confidence": "unknown",
-      "why_good": null,
-      "catch": null,
-      "best_for": [],
-      "source_url": "https://opencode.ai/docs/go/",
-      "observed_at": "2026-08-23T00:00:00Z",
-      "affiliate_url": null,
-      "scores": {
-        "quality": 0.9,
-        "cost": 0.67,
-        "reliability": 0.7,
-        "throughput": 0,
-        "profiles": {
-          "overall": 69,
-          "coding": 70,
-          "agentic": 61,
-          "research": 62
-        }
-      },
-      "badges": [
-        "Tools",
-        "Vision"
-      ]
-    },
-    {
-      "kind": "route",
-      "slug": "opencode-go-gpt-5.6-luna",
-      "id": "opencode-go:gpt-5.6-luna",
-      "title": "OpenCode Go + GPT-5.6 Luna",
-      "model": "GPT-5.6 Luna",
-      "model_id": "gpt-5.6-luna",
-      "provider": "OpenCode",
-      "provider_id": "opencode",
-      "product": "OpenCode Go",
-      "deal_type": "subscription",
-      "label": "Subscription",
-      "price_intro_usd": 5,
-      "price_recurring_usd": 10,
-      "allowance_month_usd": 60,
-      "requests_per_month": 10250,
-      "role": "balanced",
-      "ongoing_value_multiple": 6,
-      "intro_value_multiple": 12,
-      "effective_input_per_m": 0.04167,
-      "effective_output_per_m": 0.16667,
-      "list_input_per_m": 0.25,
-      "list_output_per_m": 1,
-      "ctx": "128K",
-      "rating": "unrated",
-      "rank_score": null,
-      "confidence": "unknown",
-      "why_good": null,
-      "catch": null,
-      "best_for": [],
-      "source_url": "https://opencode.ai/docs/go/",
-      "observed_at": "2026-08-23T00:00:00Z",
-      "affiliate_url": null,
-      "scores": {
-        "quality": 0.75,
-        "cost": 0.46,
-        "reliability": 0.7,
-        "throughput": 0.07,
-        "profiles": {
-          "overall": 57,
-          "coding": 58,
-          "agentic": 53,
-          "research": 53
-        }
-      },
-      "badges": [
-        "Tools",
-        "Vision"
-      ]
-    },
-    {
-      "kind": "route",
-      "slug": "opencode-go-glm-5.3",
-      "id": "opencode-go:glm-5.3",
-      "title": "OpenCode Go + GLM 5.3",
-      "model": "GLM 5.3",
-      "model_id": "glm-5.3",
-      "provider": "OpenCode",
-      "provider_id": "opencode",
-      "product": "OpenCode Go",
-      "deal_type": "subscription",
-      "label": "Subscription",
-      "price_intro_usd": 5,
-      "price_recurring_usd": 10,
-      "allowance_month_usd": 60,
-      "requests_per_month": 1080,
-      "role": "premium_reasoning",
-      "ongoing_value_multiple": 6,
-      "intro_value_multiple": 12,
-      "effective_input_per_m": 0.04667,
-      "effective_output_per_m": 0.09333,
-      "list_input_per_m": 0.28,
-      "list_output_per_m": 0.56,
-      "ctx": "128K",
-      "rating": "unrated",
-      "rank_score": null,
-      "confidence": "unknown",
-      "why_good": null,
-      "catch": null,
-      "best_for": [],
-      "source_url": "https://opencode.ai/docs/go/",
-      "observed_at": "2026-08-23T00:00:00Z",
-      "affiliate_url": null,
-      "scores": {
-        "quality": 0.75,
-        "cost": 0.67,
-        "reliability": 0.7,
-        "throughput": 0.01,
-        "profiles": {
-          "overall": 64,
-          "coding": 64,
-          "agentic": 57,
-          "research": 57
-        }
-      },
-      "badges": [
-        "Tools"
-      ]
-    },
-    {
-      "kind": "route",
-      "slug": "opencode-go-minimax-m3",
-      "id": "opencode-go:minimax-m3",
-      "title": "OpenCode Go + MiniMax M3",
-      "model": "MiniMax M3",
-      "model_id": "minimax-m3",
-      "provider": "OpenCode",
-      "provider_id": "opencode",
-      "product": "OpenCode Go",
-      "deal_type": "subscription",
-      "label": "Subscription",
-      "price_intro_usd": 5,
-      "price_recurring_usd": 10,
-      "allowance_month_usd": 60,
-      "requests_per_month": 16000,
-      "role": "balanced",
-      "ongoing_value_multiple": 6,
-      "intro_value_multiple": 12,
-      "effective_input_per_m": 0.02333,
-      "effective_output_per_m": 0.04667,
-      "list_input_per_m": 0.14,
-      "list_output_per_m": 0.28,
-      "ctx": "128K",
-      "rating": "unrated",
-      "rank_score": null,
-      "confidence": "unknown",
-      "why_good": null,
-      "catch": null,
-      "best_for": [],
-      "source_url": "https://opencode.ai/docs/go/",
-      "observed_at": "2026-08-23T00:00:00Z",
-      "affiliate_url": null,
-      "scores": {
-        "quality": 0.6,
-        "cost": 0.84,
-        "reliability": 0.7,
-        "throughput": 0.11,
-        "profiles": {
-          "overall": 65,
-          "coding": 64,
-          "agentic": 59,
-          "research": 58
-        }
-      },
-      "badges": [
-        "Tools"
-      ]
-    },
-    {
-      "kind": "route",
-      "slug": "opencode-go-grok-4.5",
-      "id": "opencode-go:grok-4.5",
-      "title": "OpenCode Go + Grok 4.5",
-      "model": "Grok 4.5",
-      "model_id": "grok-4.5",
-      "provider": "OpenCode",
-      "provider_id": "opencode",
-      "product": "OpenCode Go",
-      "deal_type": "subscription",
-      "label": "Subscription",
-      "price_intro_usd": 5,
-      "price_recurring_usd": 10,
-      "allowance_month_usd": 60,
-      "requests_per_month": 600,
-      "role": "premium_reasoning",
-      "ongoing_value_multiple": 6,
-      "intro_value_multiple": 12,
-      "effective_input_per_m": 0.08333,
-      "effective_output_per_m": 0.33333,
-      "list_input_per_m": 0.5,
-      "list_output_per_m": 2,
+      "effective_input_per_m": 0.31667,
+      "effective_output_per_m": 1.33333,
+      "list_input_per_m": 1.9,
+      "list_output_per_m": 8,
       "ctx": "128K",
       "rating": "unrated",
       "rank_score": null,
@@ -993,7 +859,237 @@
       "badges": [
         "Tools",
         "Vision"
-      ]
+      ],
+      "effective_value_multiple": 1.52,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.0311,
+      "mega": null
+    },
+    {
+      "kind": "route",
+      "slug": "opencode-go-gpt-5.6-luna",
+      "id": "opencode-go:gpt-5.6-luna",
+      "title": "OpenCode Go + GPT-5.6 Luna",
+      "model": "GPT-5.6 Luna",
+      "model_id": "gpt-5.6-luna",
+      "provider": "OpenCode",
+      "provider_id": "opencode",
+      "product": "OpenCode Go",
+      "deal_type": "subscription",
+      "label": "Subscription",
+      "price_intro_usd": 5,
+      "price_recurring_usd": 10,
+      "allowance_month_usd": 60,
+      "requests_per_month": 10250,
+      "role": "balanced",
+      "ongoing_value_multiple": 6,
+      "intro_value_multiple": 12,
+      "effective_input_per_m": 0.03333,
+      "effective_output_per_m": 0.2,
+      "list_input_per_m": 0.2,
+      "list_output_per_m": 1.2,
+      "ctx": "128K",
+      "rating": "unrated",
+      "rank_score": null,
+      "confidence": "unknown",
+      "why_good": null,
+      "catch": null,
+      "best_for": [],
+      "source_url": "https://opencode.ai/docs/go/",
+      "observed_at": "2026-08-23T00:00:00Z",
+      "affiliate_url": null,
+      "scores": {
+        "quality": 0.75,
+        "cost": 0.37,
+        "reliability": 0.7,
+        "throughput": 0.07,
+        "profiles": {
+          "overall": 54,
+          "coding": 56,
+          "agentic": 51,
+          "research": 51
+        }
+      },
+      "badges": [
+        "Tools",
+        "Vision"
+      ],
+      "effective_value_multiple": 2,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.00195,
+      "mega": {
+        "score": 20,
+        "reasons": [
+          "2x effective value"
+        ],
+        "category": "usage_multiplier"
+      }
+    },
+    {
+      "kind": "route",
+      "slug": "opencode-go-glm-5.3",
+      "id": "opencode-go:glm-5.3",
+      "title": "OpenCode Go + GLM 5.3",
+      "model": "GLM 5.3",
+      "model_id": "glm-5.3",
+      "provider": "OpenCode",
+      "provider_id": "opencode",
+      "product": "OpenCode Go",
+      "deal_type": "subscription",
+      "label": "Subscription",
+      "price_intro_usd": 5,
+      "price_recurring_usd": 10,
+      "allowance_month_usd": 60,
+      "requests_per_month": 1080,
+      "role": "premium_reasoning",
+      "ongoing_value_multiple": 6,
+      "intro_value_multiple": 12,
+      "effective_input_per_m": 0.08333,
+      "effective_output_per_m": 0.33333,
+      "list_input_per_m": 0.5,
+      "list_output_per_m": 2,
+      "ctx": "128K",
+      "rating": "unrated",
+      "rank_score": null,
+      "confidence": "unknown",
+      "why_good": null,
+      "catch": null,
+      "best_for": [],
+      "source_url": "https://opencode.ai/docs/go/",
+      "observed_at": "2026-08-23T00:00:00Z",
+      "affiliate_url": null,
+      "scores": {
+        "quality": 0.75,
+        "cost": 0,
+        "reliability": 0.7,
+        "throughput": 0.01,
+        "profiles": {
+          "overall": 40,
+          "coding": 44,
+          "agentic": 40,
+          "research": 40
+        }
+      },
+      "badges": [
+        "Tools"
+      ],
+      "effective_value_multiple": 0.88,
+      "vs_payg": "worse",
+      "agent_cost_per_req": 0.00816,
+      "mega": null
+    },
+    {
+      "kind": "route",
+      "slug": "opencode-go-minimax-m3",
+      "id": "opencode-go:minimax-m3",
+      "title": "OpenCode Go + MiniMax M3",
+      "model": "MiniMax M3",
+      "model_id": "minimax-m3",
+      "provider": "OpenCode",
+      "provider_id": "opencode",
+      "product": "OpenCode Go",
+      "deal_type": "subscription",
+      "label": "Subscription",
+      "price_intro_usd": 5,
+      "price_recurring_usd": 10,
+      "allowance_month_usd": 60,
+      "requests_per_month": 16000,
+      "role": "balanced",
+      "ongoing_value_multiple": 6,
+      "intro_value_multiple": 12,
+      "effective_input_per_m": 0.05,
+      "effective_output_per_m": 0.2,
+      "list_input_per_m": 0.3,
+      "list_output_per_m": 1.2,
+      "ctx": "128K",
+      "rating": "unrated",
+      "rank_score": null,
+      "confidence": "unknown",
+      "why_good": null,
+      "catch": null,
+      "best_for": [],
+      "source_url": "https://opencode.ai/docs/go/",
+      "observed_at": "2026-08-23T00:00:00Z",
+      "affiliate_url": null,
+      "scores": {
+        "quality": 0.6,
+        "cost": 0.35,
+        "reliability": 0.7,
+        "throughput": 0.11,
+        "profiles": {
+          "overall": 48,
+          "coding": 50,
+          "agentic": 46,
+          "research": 46
+        }
+      },
+      "badges": [
+        "Tools"
+      ],
+      "effective_value_multiple": 7.83,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.00489,
+      "mega": {
+        "score": 35,
+        "reasons": [
+          "7.83x effective value"
+        ],
+        "category": "usage_multiplier"
+      }
+    },
+    {
+      "kind": "route",
+      "slug": "opencode-go-grok-4.5",
+      "id": "opencode-go:grok-4.5",
+      "title": "OpenCode Go + Grok 4.5",
+      "model": "Grok 4.5",
+      "model_id": "grok-4.5",
+      "provider": "OpenCode",
+      "provider_id": "opencode",
+      "product": "OpenCode Go",
+      "deal_type": "subscription",
+      "label": "Subscription",
+      "price_intro_usd": 5,
+      "price_recurring_usd": 10,
+      "allowance_month_usd": 60,
+      "requests_per_month": 600,
+      "role": "premium_reasoning",
+      "ongoing_value_multiple": 6,
+      "intro_value_multiple": 12,
+      "effective_input_per_m": 0.33333,
+      "effective_output_per_m": 1,
+      "list_input_per_m": 2,
+      "list_output_per_m": 6,
+      "ctx": "128K",
+      "rating": "unrated",
+      "rank_score": null,
+      "confidence": "unknown",
+      "why_good": null,
+      "catch": null,
+      "best_for": [],
+      "source_url": "https://opencode.ai/docs/go/",
+      "observed_at": "2026-08-23T00:00:00Z",
+      "affiliate_url": null,
+      "scores": {
+        "quality": 0.9,
+        "cost": 0,
+        "reliability": 0.7,
+        "throughput": 0,
+        "profiles": {
+          "overall": 46,
+          "coding": 50,
+          "agentic": 45,
+          "research": 46
+        }
+      },
+      "badges": [
+        "Tools",
+        "Vision"
+      ],
+      "effective_value_multiple": 1.49,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.0249,
+      "mega": null
     },
     {
       "kind": "offer",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T19:46:42.075Z",
+  "generated_at": "2026-08-22T20:09:23.318Z",
   "schema_version": "llmdeals.api.v1",
   "deals": [
     {
@@ -53,7 +53,18 @@
       },
       "badges": [
         "Tools"
-      ]
+      ],
+      "effective_value_multiple": 6,
+      "vs_payg": "better",
+      "agent_cost_per_req": 0.000399,
+      "mega": {
+        "score": 60,
+        "reasons": [
+          "150K req/mo quota",
+          "6x effective value"
+        ],
+        "category": "capacity_anomaly"
+      }
     },
     {
       "kind": "offer",

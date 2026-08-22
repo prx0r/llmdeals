@@ -373,7 +373,8 @@
       "cache_per_m": 0.0028,
       "tools": true,
       "vision": false,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "muse-spark-1.2",
@@ -383,10 +384,11 @@
       "ctx": "128K",
       "in_per_m": 0.1,
       "out_per_m": 0.2,
-      "cache_per_m": null,
+      "cache_per_m": 0.002,
       "tools": false,
       "vision": false,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "deepseek-v4-flash",
@@ -394,12 +396,13 @@
       "provider": "opencode",
       "family": "DeepSeek",
       "ctx": "128K",
-      "in_per_m": 0.14,
-      "out_per_m": 0.28,
-      "cache_per_m": 0.014,
+      "in_per_m": 0.22,
+      "out_per_m": 0.66,
+      "cache_per_m": 0.007,
       "tools": true,
       "vision": false,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "deepseek-v4-pro",
@@ -407,12 +410,13 @@
       "provider": "opencode",
       "family": "DeepSeek",
       "ctx": "128K",
-      "in_per_m": 0.28,
-      "out_per_m": 0.56,
-      "cache_per_m": 0.028,
+      "in_per_m": 0.66,
+      "out_per_m": 1.98,
+      "cache_per_m": 0.022,
       "tools": true,
       "vision": false,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "qwen3.7-plus",
@@ -420,12 +424,13 @@
       "provider": "opencode",
       "family": "Qwen",
       "ctx": "128K",
-      "in_per_m": 0.1,
-      "out_per_m": 0.2,
-      "cache_per_m": 0.01,
+      "in_per_m": 0.4,
+      "out_per_m": 1.6,
+      "cache_per_m": 0.04,
       "tools": true,
       "vision": false,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "qwen3.7-max",
@@ -433,12 +438,13 @@
       "provider": "opencode",
       "family": "Qwen",
       "ctx": "128K",
-      "in_per_m": 0.2,
-      "out_per_m": 0.4,
-      "cache_per_m": 0.02,
+      "in_per_m": 0.6,
+      "out_per_m": 2.4,
+      "cache_per_m": 0.06,
       "tools": true,
       "vision": false,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "kimi-k2.7-code",
@@ -446,12 +452,13 @@
       "provider": "opencode",
       "family": "Kimi",
       "ctx": "128K",
-      "in_per_m": 0.14,
-      "out_per_m": 0.28,
-      "cache_per_m": 0.014,
+      "in_per_m": 0.95,
+      "out_per_m": 4.0,
+      "cache_per_m": 0.19,
       "tools": true,
       "vision": true,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "kimi-k3",
@@ -459,12 +466,13 @@
       "provider": "opencode",
       "family": "Kimi",
       "ctx": "128K",
-      "in_per_m": 0.28,
-      "out_per_m": 0.56,
-      "cache_per_m": 0.028,
+      "in_per_m": 1.9,
+      "out_per_m": 8.0,
+      "cache_per_m": 0.38,
       "tools": true,
       "vision": true,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "gpt-5.6-luna",
@@ -472,12 +480,13 @@
       "provider": "opencode",
       "family": "GPT",
       "ctx": "128K",
-      "in_per_m": 0.25,
-      "out_per_m": 1.0,
-      "cache_per_m": 0.025,
+      "in_per_m": 0.2,
+      "out_per_m": 1.2,
+      "cache_per_m": 0.02,
       "tools": true,
       "vision": true,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "glm-5.3",
@@ -485,12 +494,13 @@
       "provider": "opencode",
       "family": "GLM",
       "ctx": "128K",
-      "in_per_m": 0.28,
-      "out_per_m": 0.56,
-      "cache_per_m": 0.028,
+      "in_per_m": 0.5,
+      "out_per_m": 2.0,
+      "cache_per_m": 0.1,
       "tools": true,
       "vision": false,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "hy3",
@@ -498,12 +508,13 @@
       "provider": "opencode",
       "family": "HY",
       "ctx": "128K",
-      "in_per_m": 0.1,
-      "out_per_m": 0.2,
+      "in_per_m": 0.14,
+      "out_per_m": 0.58,
       "cache_per_m": 0.01,
       "tools": true,
       "vision": false,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "minimax-m3",
@@ -511,12 +522,13 @@
       "provider": "opencode",
       "family": "MiniMax",
       "ctx": "128K",
-      "in_per_m": 0.14,
-      "out_per_m": 0.28,
-      "cache_per_m": 0.014,
+      "in_per_m": 0.3,
+      "out_per_m": 1.2,
+      "cache_per_m": 0.06,
       "tools": true,
       "vision": false,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     },
     {
       "id": "grok-4.5",
@@ -524,12 +536,13 @@
       "provider": "opencode",
       "family": "Grok",
       "ctx": "128K",
-      "in_per_m": 0.5,
-      "out_per_m": 2.0,
-      "cache_per_m": 0.05,
+      "in_per_m": 2.0,
+      "out_per_m": 6.0,
+      "cache_per_m": 0.3,
       "tools": true,
       "vision": true,
-      "json": true
+      "json": true,
+      "price_source": "opencode.ai/docs/go model table via dell2 verified scrape 2026-08-22"
     }
   ],
   "deal_routes": [

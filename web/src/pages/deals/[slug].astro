@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import seed from '../../data/seed.json';
+import derived from '../../data/deals-derived.json';
 
 export function getStaticPaths() {
   const paths = [];
@@ -13,6 +14,13 @@ export function getStaticPaths() {
     if (!offer || !model) continue;
     const a = seed.assessments.find(x => x.route_id === `${route.offer.split('-2026')[0] === 'opencode-go' ? 'opencode-go' : route.offer}:${route.model}`) 
       || seed.assessments.find(x => x.route_id === `opencode-go:${route.model}`);
+    const computed = derived.deals.find(d => d.slug === route.slug) ?? {};
+    Object.assign(route, {
+      effective_value_multiple: computed.effective_value_multiple ?? null,
+      vs_payg: computed.vs_payg ?? null,
+      agent_cost_per_req: computed.agent_cost_per_req ?? null,
+      mega: computed.mega ?? null,
+    });
     paths.push({
       params: { slug: route.slug },
       props: { kind: 'route', route, offer, model, assessment: a, provider: providers[offer.provider] }
@@ -62,6 +70,7 @@ const ratingColor = { exceptional:'var(--accent)', excellent:'var(--blue)', good
     <div class="badges">
       {score && <span class="score">{score}/100</span>}
       <span class="rating" style={`color:${ratingColor}`}>{rating}</span>
+      {assessment && route?.mega && <span class="score" style="background:rgba(249,115,22,0.15);color:var(--orange)">🔥 Mega deal</span>}
       {confidence && <span class="conf">confidence: {confidence}</span>}
     </div>
   </section>
@@ -118,8 +127,10 @@ const ratingColor = { exceptional:'var(--accent)', excellent:'var(--blue)', good
           <tr><td>List output price</td><td>{money(model.out_per_m)}/M tokens</td></tr>
           <tr class="hl"><td>Effective input</td><td>{money(effIn)}/M</td></tr>
           <tr class="hl"><td>Effective output</td><td>{money(effOut)}/M</td></tr>
-          <tr><td>Ongoing value multiple</td><td>{route.ongoing_value_multiple}x ({money(offer.allowance_month_usd)} / {money(offer.price_recurring_usd)})</td></tr>
-          <tr><td>First-month multiple</td><td>{route.intro_value_multiple}x</td></tr>
+          <tr class="hl"><td>Effective value (agent usage)</td><td>{route.effective_value_multiple ?? '—'}x{route.vs_payg === 'worse' && ' ⚠ worse than pay-as-you-go'}</td></tr>
+          <tr><td>Nominal pool multiple</td><td>{route.ongoing_value_multiple}x ({money(offer.allowance_month_usd)} / {money(offer.price_recurring_usd)})</td></tr>
+          <tr><td>First-month nominal</td><td>{route.intro_value_multiple}x</td></tr>
+          <tr><td>Est. cost/request</td><td>${route.agent_cost_per_req} <span style="color:var(--text-dim)">(830 in + 71.5K cached + 295 out tokens)</span></td></tr>
         </table>
       ) : assessment?.route_id === 'cloudflare-workers-free-2026-08' ? (
         <p class="mathnote">10,000 neurons/day x $0.011/1K neurons x 30 days = $3.30/month equivalent at paid rates.</p>

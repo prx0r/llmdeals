@@ -92,6 +92,7 @@ const dealCardsHtml = topDeals.map(d => `
           <th data-col="effIn" data-num>Eff $/M In</th>
           <th data-col="effOut" data-num>Eff $/M Out</th>
           <th data-col="requests" data-num>Req/Mo</th>
+          <th data-col="effMult" data-num title="List-value of your typical usage at request cap, divided by the $10 fee. Under 1x = worse than pay-as-you-go">Eff. Value</th>
           <th>Badges</th>
           <th data-col="role">Role</th>
         </tr></thead>
@@ -100,9 +101,9 @@ const dealCardsHtml = topDeals.map(d => `
     </div>
   </section>
 
-  <script define:vars={{ allRoutes: JSON.stringify(routeRows.map(r => ({model:r.model,id:r.model_id,ctx:r.ctx,inP:r.list_input_per_m,outP:r.list_output_per_m,effIn:r.effective_input_per_m,effOut:r.effective_output_per_m,requests:r.requests_per_month,role:r.role,scores:r.scores.profiles,badges:r.badges}))) }}>
+  <script define:vars={{ allRoutes: JSON.stringify(routeRows.map(r => ({model:r.model,id:r.model_id,ctx:r.ctx,inP:r.list_input_per_m,outP:r.list_output_per_m,effIn:r.effective_input_per_m,effOut:r.effective_output_per_m,requests:r.requests_per_month,role:r.role,scores:r.scores.profiles,badges:r.badges,effMult:r.effective_value_multiple,vsPayg:r.vs_payg,mega:r.mega}))) }}>
     const routes = JSON.parse(allRoutes);
-    let sort = {col:'overall', dir:'desc'};
+    let sort = {col:'effMult', dir:'desc'};
     let profile = 'overall';
     let filtered = [...routes];
 
@@ -133,7 +134,10 @@ const dealCardsHtml = topDeals.map(d => `
         <td style="font-size:11px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600">$${Number(r.effIn).toFixed(5)}</td>
         <td style="font-size:11px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600">$${Number(r.effOut).toFixed(5)}</td>
         <td style="font-size:12px;font-variant-numeric:tabular-nums">${r.requests ? r.requests.toLocaleString() : '-'}</td>
-        <td>${r.badges.map(b=>`<span class="badge badge-type" style="margin-right:3px">${b}</span>`).join('')}</td>
+        <td>${r.effMult != null
+          ? `<span class="price" style="font-weight:800;color:${r.vsPayg==='worse'?'var(--red)':r.effMult>=3?'var(--accent)':'var(--yellow)'}">${r.effMult}x</span>${r.vsPayg==='worse'?'<div style="font-size:9px;color:var(--orange)">worse than PAYG</div>':''}`
+          : '—'}</td>
+        <td>${r.mega?'<span class="badge badge-free" style="margin-right:3px">🔥 Mega</span>':''}${r.badges.map(b=>`<span class="badge badge-type" style="margin-right:3px">${b}</span>`).join('')}</td>
         <td style="font-size:11px;color:var(--text-dim)">${(r.role||'').replace(/_/g,' ')}</td>
       </tr>`).join('');
       document.querySelectorAll('th[data-col]').forEach(th => {

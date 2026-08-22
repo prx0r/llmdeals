@@ -11,6 +11,19 @@ const assessmentByRoute = Object.fromEntries(seed.assessments.map(a => [a.route_
 
 function blended(inP, outP) { return inP + outP * 3; }
 
+// Agent request profile from dell2 verified math (graph.py): 830 input +
+// 71,500 cache-read + 295 output tokens per request. Uses PER-MODEL cached
+// price (fixes dell2's bug of hardcoding MiMo's 0.0028 for every model).
+const PROFILE = { in: 830, cached: 71500, out: 295 };
+function agentCostPerReq(m) {
+  const cachedRate = m.cache_per_m ?? m.in_per_m * 0.1;
+  return (m.in_per_m * PROFILE.in + cachedRate * PROFILE.cached + m.out_per_m * PROFILE.out) / 1e6;
+}
+function effectiveMultiple(route, offer, m) {
+  if (!route.requests_per_month || !m || m.in_per_m == null) return null;
+  return +((route.requests_per_month * agentCostPerReq(m)) / offer.price_recurring_usd).toFixed(2);
+}
+
 // Deterministic profile scoring — formula documented on /methodology
 function qualityScore(m, role) {
   let cap = 0;
@@ -53,6 +66,30 @@ function scoreRoute(route, offer, model, assessment) {
   return { quality:+q.toFixed(2), cost:+c.toFixed(2), reliability:rel, throughput:+t.toFixed(2), profiles };
 }
 
+// Mega-deal detector — deterministic port of dell/app/mega_deals.py.
+// Every reason is a stated fact; score >= 20 flags the deal. Sub-1x effective
+// multiple disqualifies (subscription worse than pay-as-you-go).
+function detectMega(d, effMult) {
+  let score = 0; const reasons = [];
+  if (d.requests_per_month >= 100000) {
+    reasons.push(`${Math.round(d.requests_per_month/1000)}K req/mo quota`);
+    score += Math.min(40, d.requests_per_month / 5000);
+  }
+  if (effMult && effMult >= 3) { reasons.push(`${effMult}x effective value`); score += Math.min(35, effMult * 5); }
+  else if (effMult && effMult >= 2) { reasons.push(`${effMult}x effective value`); score += 20; }
+  if (d.deal_type === 'free' && d.free_requests_per_day >= 1000) {
+    reasons.push(`free ${d.free_requests_per_day} req/day`); score += 25;
+  }
+  if (d.kind === 'offer' && d.allowance_usd_ref >= 50) { reasons.push('$50+ monthly pool'); score += 20; }
+  const disqualified = effMult != null && effMult < 1;
+  if (disqualified) return null;
+  if (!reasons.length || score < 20) return null;
+  const category = reasons.some(r=>r.includes('req/mo')) ? 'capacity_anomaly'
+    : reasons.some(r=>r.includes('effective')) ? 'usage_multiplier'
+    : reasons.some(r=>r.includes('free')) ? 'high_quota_free' : 'price_anomaly';
+  return { score: Math.min(100, Math.round(score)), reasons, category };
+}
+
 function badgesFor(offer, model) {
   const b = [];
   if (offer.deal_type === 'free' || offer.price_recurring_usd === 0) b.push('Free');
@@ -73,7 +110,8 @@ for (const route of seed.deal_routes) {
   const a = assessmentByRoute[route.id];
   if (!offer || !model) continue;
   const ratio = (offer.price_recurring_usd ?? 10) / (offer.allowance_month_usd ?? 60);
-  deals.push({
+  const effMult = effectiveMultiple(route, offer, model);
+  const row = {
     kind:'route', slug:route.slug, id:route.id,
     title:`${offer.product} + ${model.name}`, model:model.name, model_id:model.id,
     provider:providerById[offer.provider]?.name, provider_id:offer.provider,
@@ -92,7 +130,12 @@ for (const route of seed.deal_routes) {
     affiliate_url:offer.affiliate_url,
     scores:scoreRoute(route, offer, model, a),
     badges:badgesFor(offer, model),
-  });
+  };
+  row.effective_value_multiple = effMult;
+  row.vs_payg = effMult != null && effMult < 1 ? 'worse' : effMult >= 1 ? 'better' : null;
+  row.agent_cost_per_req = +(agentCostPerReq(model)).toPrecision(3);
+  row.mega = detectMega(row, effMult);
+  deals.push(row);
 }
 for (const offer of seed.offers) {
   if (!offer.slug) continue;
