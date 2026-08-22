@@ -1,0 +1,171 @@
+---
+import Base from '../../layouts/Base.astro';
+import seed from '../../../../data/seed.json';
+
+export function getStaticPaths() {
+  const paths = [];
+  const providers = Object.fromEntries(seed.providers.map(p => [p.id, p]));
+
+  // Route pages: offer x model
+  for (const route of seed.deal_routes) {
+    const offer = seed.offers.find(o => o.id === route.offer);
+    const model = seed.models.find(m => m.id === route.model);
+    if (!offer || !model) continue;
+    const a = seed.assessments.find(x => x.route_id === `${route.offer.split('-2026')[0] === 'opencode-go' ? 'opencode-go' : route.offer}:${route.model}`) 
+      || seed.assessments.find(x => x.route_id === `opencode-go:${route.model}`);
+    paths.push({
+      params: { slug: route.slug },
+      props: { kind: 'route', route, offer, model, assessment: a, provider: providers[offer.provider] }
+    });
+  }
+
+  // Offer-level pages
+  for (const offer of seed.offers) {
+    if (!offer.slug) continue;
+    const a = seed.assessments.find(x => x.route_id === offer.id);
+    paths.push({
+      params: { slug: offer.slug },
+      props: { kind: 'offer', offer, assessment: a, provider: providers[offer.provider], model: null, route: null }
+    });
+  }
+  return paths;
+}
+
+const { kind, route, offer, model, assessment, provider } = Astro.props;
+
+const title = kind === 'route' ? `${offer.product} + ${model.name}` : offer.product;
+const rating = assessment?.rating || 'unrated';
+const score = assessment?.rank_score;
+const bestFor = assessment?.best_for?.join(', ') || null;
+const whyGood = assessment?.why_good || null;
+const catchText = assessment?.catch || null;
+const confidence = assessment?.confidence || null;
+
+// Effective economics
+let effIn = null, effOut = null;
+if (kind === 'route' && route.requests_per_month && model.in_per_m != null) {
+  const ratio = (offer.price_recurring_usd ?? 10) / (offer.allowance_month_usd ?? 60);
+  effIn = model.in_per_m * ratio;
+  effOut = model.out_per_m * ratio;
+}
+
+function money(v) { return '$' + Number(v).toFixed(v < 0.01 ? 5 : 2); }
+const ratingColor = { exceptional:'var(--accent)', excellent:'var(--blue)', good:'var(--yellow)', niche:'var(--text-dim)' }[rating] || 'var(--text-muted)';
+---
+<Base title={`${title} - LLMDeals`}>
+  <a href="/deals" class="back">All deals</a>
+  <section class="head">
+    <div class="provider-line">
+      <span class="pdot" style={`background:${provider?.color}`}></span>{provider?.name} · {offer.label}
+    </div>
+    <h1>{title}</h1>
+    <div class="badges">
+      {score && <span class="score">{score}/100</span>}
+      <span class="rating" style={`color:${ratingColor}`}>{rating}</span>
+      {confidence && <span class="conf">confidence: {confidence}</span>}
+    </div>
+  </section>
+
+  {whyGood && (
+    <section class="panel verdict">
+      <div class="label">Verdict</div>
+      <p>{whyGood}</p>
+    </section>
+  )}
+
+  <section class="grid2">
+    <div class="panel">
+      <div class="label">The terms</div>
+      <ul class="terms">
+        {kind === 'route' ? (
+          <>
+            <li><strong>{money(offer.price_intro_usd)}</strong> first month</li>
+            <li><strong>{money(offer.price_recurring_usd)}/month</strong> after that</li>
+            <li><strong>{money(offer.allowance_month_usd)}</strong> usage pool per month</li>
+            <li>Caps: {money(offer.limit_5h_usd)}/5h · {money(offer.limit_week_usd)}/week</li>
+            <li>Typical volume for {model.name}: <strong>{route.requests_per_month?.toLocaleString()} requests/mo</strong></li>
+          </>
+        ) : (
+          <>
+            {offer.price_month_usd != null && <li><strong>{money(offer.price_month_usd)}/month</strong></li>}
+            {offer.credit_usd != null && <li><strong>{money(offer.credit_usd)} credit</strong>, expires after {offer.expires_after_days} days</li>}
+            {offer.credit_per_month_usd != null && <li><strong>{money(offer.credit_per_month_usd)}/month</strong> credit</li>}
+            {offer.free_neurons_per_day != null && <li><strong>{offer.free_neurons_per_day.toLocaleString()} neurons/day free</strong></li>}
+            {offer.free_requests_per_day != null && <li><strong>{offer.free_requests_per_day} free requests/day</strong> ({offer.free_requests_per_minute}/min)</li>}
+            {offer.required_balance_usd != null && <li>Add <strong>{money(offer.required_balance_usd)} balance</strong> (spendable) to unlock {offer.unlocked_requests_per_day} req/day</li>}
+            {offer.note && <li>{offer.note}</li>}
+          </>
+        )}
+      </ul>
+      <a href={offer.source_url} target="_blank" rel="noopener" class="src-link">Official source: {new URL(offer.source_url).hostname}</a>
+      <div class="observed">Verified {offer.observed_at.slice(0,10)}</div>
+    </div>
+
+    <div class="panel">
+      <div class="label">The math</div>
+      {effIn != null ? (
+        <table class="math">
+          <tr><td>List input price</td><td>{money(model.in_per_m)}/M tokens</td></tr>
+          <tr><td>List output price</td><td>{money(model.out_per_m)}/M tokens</td></tr>
+          <tr class="hl"><td>Effective input</td><td>{money(effIn)}/M</td></tr>
+          <tr class="hl"><td>Effective output</td><td>{money(effOut)}/M</td></tr>
+          <tr><td>Ongoing value multiple</td><td>{route.ongoing_value_multiple}x ({money(offer.allowance_month_usd)} / {money(offer.price_recurring_usd)})</td></tr>
+          <tr><td>First-month multiple</td><td>{route.intro_value_multiple}x</td></tr>
+        </table>
+      ) : assessment?.route_id === 'cloudflare-workers-free-2026-08' ? (
+        <p class="mathnote">10,000 neurons/day x $0.011/1K neurons x 30 days = $3.30/month equivalent at paid rates.</p>
+      ) : offer.ai_credits != null ? (
+        <p class="mathnote">{offer.ai_credits.toLocaleString()} credits x ${offer.credit_value_usd.toFixed(2)} = {money(offer.credit_value_total_usd)} of metered AI value for {money(offer.price_month_usd)}/month = {(offer.credit_value_total_usd / offer.price_month_usd).toFixed(2)}x. Code completions are unlimited and not billed in credits.</p>
+      ) : (
+        <p class="mathnote">Free within provider limits — effective marginal cost is $0 until quotas are hit.</p>
+      )}
+      {bestFor && <div class="label" style="margin-top:16px">Best for</div>}
+      {bestFor && <p>{bestFor}</p>}
+      {catchText && <div class="label catch-label">Watch out</div>}
+      {catchText && <p class="catch">{catchText}</p>}
+    </div>
+  </section>
+
+  {model && (
+    <section class="panel specs">
+      <div class="label">Model specs — {model.name}</div>
+      <div class="specgrid">
+        <div><span>Context</span>{model.ctx}</div>
+        <div><span>List in/out</span>${model.in_per_m} / ${model.out_per_m} per M</div>
+        <div><span>Tools</span>{model.tools ? 'Yes' : 'No'}</div>
+        <div><span>Vision</span>{model.vision ? 'Yes' : 'No'}</div>
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .back { font-size: 13px; color: var(--text-dim); display: inline-block; margin-bottom: 20px; }
+  .head { margin-bottom: 24px; }
+  .provider-line { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+  .pdot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  h1 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.03em; }
+  .badges { display: flex; gap: 12px; align-items: center; margin-top: 10px; }
+  .score { background: rgba(34,197,94,0.15); color: var(--accent); padding: 3px 10px; border-radius: 6px; font-weight: 800; font-size: 14px; }
+  .rating { text-transform: uppercase; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; }
+  .conf { color: var(--text-dim); font-size: 12px; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 14px; }
+  .verdict p { font-size: 15px; line-height: 1.6; color: var(--text); }
+  .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .terms { margin: 0; padding-left: 18px; }
+  .terms li { font-size: 13px; color: var(--text-muted); margin-bottom: 7px; line-height: 1.5; }
+  .terms strong { color: var(--text); }
+  .src-link { display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 600; }
+  .observed { font-size: 11px; color: var(--text-dim); margin-top: 6px; }
+  .math td { padding: 5px 0; font-size: 13px; color: var(--text-muted); }
+  .math td:last-child { text-align: right; color: var(--text); font-variant-numeric: tabular-nums; }
+  .math tr.hl td { color: var(--accent); font-weight: 700; }
+  .mathnote { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .catch { color: var(--orange); font-size: 13px; }
+  .catch-label { color: var(--orange); }
+  .specs .specgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .specgrid div { font-size: 14px; font-weight: 600; }
+  .specgrid span { display: block; font-size: 10px; text-transform: uppercase; color: var(--text-dim); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 2px; }
+  @media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
+</style>
