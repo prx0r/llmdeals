@@ -1,6 +1,39 @@
-# LLM Deals
+# LLMDeals
 
-Verified pricing data for AI models, with a focus on OpenCode Go deals.
+**Deal intelligence for AI.** We track AI pricing, subscriptions, free tiers and promotions, calculate what they're actually worth, evaluate the models behind them, and surface only the deals worth knowing about.
+
+Live: https://llmdeals-v2.pages.dev · Agent API: `/api/v1/top.json` `/api/v1/deals.json` `/api/v1/changes.json`
+
+## How it works
+
+```
+data/seed.json          single canonical dataset (offers, models, deal_routes,
+                        assessments, evidence quotes)
+      │ npm run build
+      ▼
+scripts/build-data.mjs  joins + scores + diffs history snapshots
+      │
+      ├─▶ web/src/data/deals-derived.json   (imported by pages)
+      └─▶ web/public/api/v1/*.json          (static agent API)
+      │
+      ▼ astro build → dist/ (29 static pages incl. /deals/[slug])
+```
+
+- Rankings use deterministic profile scores (overall / coding / agents / research) — formula on /methodology.
+- Every number traces to a quote from an official source; see any detail page.
+- Change tracking: each research pass snapshots to `data/history/`, diffs emit to /changes.
+- Discovery contract: run `node scripts/validate-candidate.mjs <candidate.json>` — PASS required before merging new offers into seed.json. See AGENTS.md for build conventions.
+
+## Development
+
+```bash
+cd web
+npm install
+npm run dev        # prebuild regenerates derived data automatically
+npm run build      # full static build incl. API JSON
+```
+
+Deploy: `npx wrangler pages deploy web/dist --project-name=llmdeals-v2 --branch=main`
 
 ## Features
 
