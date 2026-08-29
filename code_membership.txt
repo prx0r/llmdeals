@@ -1,0 +1,189 @@
+Membership Benefits | Kimi Code Docs
+Skip to content
+Kimi Code Docs
+Search
+⌘
+Ctrl
+K
+English
+简体中文
+English
+简体中文
+Appearance
+Menu
+Return to top
+Sidebar Navigation
+Kimi Code
+Overview
+Model Configuration
+Membership Benefits
+What's New
+Community Guidelines
+Help & Feedback
+FAQ
+Error Reference
+Contact & Feedback
+Kimi Code CLI
+Getting started
+Migrating from kimi-cli
+Guides
+Common use cases
+Interaction and input
+Sessions and context
+Goals
+Using Kimi Code CLI in IDEs
+Local Server and API
+Configuration
+Configuration files
+Providers and models
+Config overrides
+Environment variables
+Data locations
+Customization
+Model Context Protocol
+Agent Skills
+Plugins
+Agents and Sub-Agents
+Hooks
+Kimi Datasource
+Custom Themes
+Reference
+kimi Command
+kimi acp Subcommand
+Built-in Tools
+Slash Commands
+Keyboard Shortcuts
+Server API
+Release Notes
+Changelog
+Kimi Code for VS Code
+Quick Start
+Core Operations
+Configuration
+Customization
+Use in Third-Party Tools
+Claude Code
+OpenCode
+Codex
+Hermes Agent
+On this page
+Membership Benefits
+​
+Overview
+​
+Kimi Code is the developer-focused AI coding service within
+Kimi membership benefits
+, provided together with a Kimi membership subscription and sharing the same quota. Requests from the CLI, VS Code, and third-party tools all count toward that quota.
+See the
+Kimi membership page
+for tiers and pricing.
+Quota and Limits
+​
+Kimi Code's quota
+refreshes automatically every 7 days
+from your subscription date; unused quota does not roll over. Beyond the weekly quota, there is also a
+rolling 5-hour rate window
+— even with quota remaining, too many requests in a short time trigger rate limiting, which recovers automatically once the window rolls over.
+All logged-in devices and API Keys share the same quota; devices inactive for over 30 days are automatically unbound and can be restored by running
+/login
+again. Log in to the
+Kimi Code Console
+at any time to check remaining quota and rate-limit status and to manage API Keys and devices.
+Kimi Code shares quota with your Kimi membership plan: if your Kimi membership's monthly total is reached, Kimi Code quota is frozen until the monthly quota resets or you upgrade. Monthly usage can be viewed on the
+Subscription
+page.
+Extra Usage
+​
+When your subscription quota runs out, you can keep making requests using your Extra Usage balance without waiting for a refresh. Only subscribed members can enable it, and
+Kimi on the web and Kimi Code share the same Extra Usage balance
+. See the full terms in the
+Extra Usage Agreement
+.
+Top-up entry points
+​
+From the main site
+: go to the Kimi
+Subscription page
+, scroll to the "Extra Usage" module at the bottom then choose an amount and complete payment.
+From the Kimi Code Console
+: once your weekly quota or 5-hour quota reaches over
+80%
+used, the progress card shows a
+Buy Extra Usage
+button that takes you to the subscription page to purchase.
+Enabling and managing
+​
+Turn on the "Extra Usage" toggle, and when your subscription quota runs out, the system automatically deducts from your Extra Usage balance. Click
+Settings
+in the module to enable a
+monthly spending cap
+and set the maximum you can spend this month; the progress bar shows this month's Extra Usage consumption in real time.
+Billing and rules
+​
+Billing
+: charged by actual usage — the more content read and generated, and the more complex the task, the higher the cost; the balance is shown in RMB, with rates as displayed on the platform. Extra Usage pricing is close to the official API pricing of the
+Kimi Open Platform
+; for heavy usage, upgrading your subscription is usually more cost-effective.
+Deduction priority
+: time-limited quotas such as the subscription are deducted first;
+Extra Usage is deducted last
+as a fallback. Once enabled, even if your subscription quota is maxed out, Extra Usage is consumed seamlessly and tasks don't stop or error out.
+Spending cap
+: enable a "monthly spending cap" in settings to limit how much Extra Usage can be spent this month; without it, there is no cap.
+Validity and stacking
+: the balance does not expire and stacks across top-ups; it remains usable after the subscription lapses, but you can't top up during the lapse — re-subscribe first to top up again.
+Refunds
+: generally non-refundable, non-transferable, and non-redeemable.
+Billing example (from official examples, for a rough sense of scale; actual rates per the platform): a simple request (e.g. "recommend a rock song") costs about
+¥0.03
+; a complex multi-step task (e.g. "plan a week-long road trip from Chengdu to western Sichuan") costs about
+¥1.6
+.
+Top-up limits: minimum ¥25 per top-up, up to 10 times and ¥3,000 per day, with a balance cap of ¥10,000.
+Checking your usage
+​
+Kimi web / app
+: Settings → Subscription & Invoices →
+My Quota
+.
+Kimi Code Console
+:
+once Extra Usage is enabled
+, log in to the
+Console
+to view your balance and usage.
+Kimi Code CLI
+: type
+/usage
+on the command line to check directly.
+FAQ
+​
+Do Kimi on the web and Kimi Code use the same Extra Usage wallet?
+Yes. The Extra Usage balance is shared between Kimi and Kimi Code — top up once and use it in both; the Extra Usage you top up under "My Quota" and the one in the Kimi Code Console are the same balance.
+Which is deducted first, Extra Usage or subscription quota?
+Time-limited quotas such as the subscription are deducted first; Extra Usage is only deducted as a fallback once all time-limited quotas are exhausted.
+When I hit the monthly / weekly / hourly limit, or get rate-limited mid-session, can I keep going?
+Yes. Once Extra Usage is enabled you're not affected by subscription limits — whenever any quota is reached it seamlessly switches to the Extra Usage balance, so tasks don't stop or error out, and only Extra Usage is deducted without affecting your membership quota refresh.
+How is Extra Usage billed, and how does it compare with a same-priced subscription or Open Platform API?
+Billing depends on the request's input/output volume and cache hit rate; Extra Usage pricing is close to the
+Kimi Open Platform
+'s official API, and for heavy usage upgrading your subscription is usually more cost-effective.
+Can unused balance roll over to next month, and does it stack?
+Yes — it's credit-based, doesn't expire, and stacks; it stays usable after the subscription lapses, but you can't top up during the lapse and must re-subscribe to top up again.
+When the balance is nearly used up (e.g. a 25 RMB top-up), will the current request finish?
+It guarantees the "last model call" completes even if its billing exceeds the limit, but it doesn't guarantee the whole task will finish.
+Is Extra Usage available for Enterprise?
+Not yet supported.
+After I close my account, is the balance refunded?
+To request a refund, go to
+Kimi.ai
+on the web, click your profile picture in the bottom-left corner, then select
+Get Help
+→
+User Feedback
+to reach our support team.
+Pager
+Previous page
+Model Configuration
+Next page
+What's New

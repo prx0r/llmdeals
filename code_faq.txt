@@ -1,0 +1,197 @@
+FAQ | Kimi Code Docs
+Skip to content
+Kimi Code Docs
+Search
+⌘
+Ctrl
+K
+English
+简体中文
+English
+简体中文
+Appearance
+Menu
+Return to top
+Sidebar Navigation
+Kimi Code
+Overview
+Model Configuration
+Membership Benefits
+What's New
+Community Guidelines
+Help & Feedback
+FAQ
+Error Reference
+Contact & Feedback
+Kimi Code CLI
+Getting started
+Migrating from kimi-cli
+Guides
+Common use cases
+Interaction and input
+Sessions and context
+Goals
+Using Kimi Code CLI in IDEs
+Local Server and API
+Configuration
+Configuration files
+Providers and models
+Config overrides
+Environment variables
+Data locations
+Customization
+Model Context Protocol
+Agent Skills
+Plugins
+Agents and Sub-Agents
+Hooks
+Kimi Datasource
+Custom Themes
+Reference
+kimi Command
+kimi acp Subcommand
+Built-in Tools
+Slash Commands
+Keyboard Shortcuts
+Server API
+Release Notes
+Changelog
+Kimi Code for VS Code
+Quick Start
+Core Operations
+Configuration
+Customization
+Use in Third-Party Tools
+Claude Code
+OpenCode
+Codex
+Hermes Agent
+On this page
+FAQ
+​
+Installation and Authentication
+​
+Empty model list during
+/login
+​
+If you see the error "No models available for the selected platform" when running the
+/login
+command, it may be due to:
+Invalid or expired API key
+: Check whether the API key you entered is correct and still valid.
+Network connection issues
+: Confirm you can access the API service addresses (such as
+api.kimi.com
+or
+api.moonshot.cn
+).
+Note: Distinguish Platforms
+Kimi Code membership benefits and the
+Kimi Platform
+have different Base URLs. Please ensure your Base URL and API Key are matched correctly.
+Platform
+Base URL
+Billing
+Key Source
+Kimi Code
+Anthropic-compatible:
+https://api.kimi.com/coding/
+Membership subscription (quota included)
+Kimi Code Console
+Kimi Open Platform
+https://api.moonshot.cn/v1
+Pay-as-you-go
+Kimi Open Platform
+Invalid API key
+​
+Possible reasons:
+Typo
+: Check for extra spaces or missing characters.
+Expired or revoked
+: Verify the key status in the console.
+Membership expired or quota exhausted
+​
+Use the
+/usage
+command to check your current quota and membership status. If your quota is exhausted or membership has expired, renew or upgrade at
+Kimi Code
+.
+Subscription
+​
+How do I request an invoice or upgrade my membership?
+​
+Visit the
+Kimi Membership page
+and follow the instructions to submit an invoice request or upgrade your plan.
+Interaction Issues
+​
+Image paste fails
+​
+If you see "Current model does not support image input" when pasting with
+Ctrl-V
+, the current model does not support image input.
+Solutions:
+Switch to a vision-capable model
+: Use a model with
+image_in
+capability.
+Check clipboard content
+: Make sure the clipboard contains actual image data, not just a file path.
+Updates and Upgrades
+​
+Slow first launch on macOS
+​
+macOS Gatekeeper performs a security check on new programs the first time they run, causing a slow startup. Solutions:
+Wait for the check to complete
+: Be patient on first launch; subsequent startups will be normal.
+Add to Developer Tools
+: Go to System Settings → Privacy & Security → Developer Tools and add your terminal app.
+How to upgrade Kimi Code CLI
+​
+Run
+kimi upgrade
+inside the CLI to automatically check for the latest version and be guided through the upgrade. You can also use the package manager directly:
+sh
+npm
+install
+-g
+@moonshot-ai/kimi-code@latest
+VS Code Extension FAQ
+​
+The following are common questions about the Kimi Code VS Code extension.
+VS Code says no workspace is open
+​
+Open a folder in VS Code — the Kimi Code VS Code extension requires a workspace to function properly.
+VS Code says CLI not found
+​
+Manually install Kimi Code CLI and configure
+kimi.executablePath
+in VS Code settings, or ensure the built-in CLI exists.
+VS Code login fails
+​
+Try skipping login and using API key mode instead, check your network connection, or retry later via the extension's action menu.
+VS Code shows no response after sending a message
+​
+Confirm that Kimi Code CLI is available, a model is configured, and a workspace folder is open in VS Code. Check error logs via "Kimi Code: Show Logs".
+VS Code connection timeout
+​
+Requests time out after 30 seconds with no response. Check your network and retry.
+VS Code shows an error before sending a message
+​
+Certain errors prevent sending messages in VS Code, such as CLI not found, version too low, not logged in, or session busy. Errors appear as toast notifications; your input is preserved for retry.
+Feedback and Contact
+​
+Problem not resolved by this page
+​
+If the above content hasn't resolved your issue, please go to
+Kimi.ai
+on the web, click your profile picture in the bottom-left corner, then select
+Get Help
+→
+User Feedback
+to consult our support team. Please describe the problem, steps taken, and any relevant logs — we'll get back to you as soon as possible.
+Pager
+Previous page
+Community Guidelines
+Next page
+Error Reference

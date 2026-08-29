@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>404 | Kimi Code 文档</title>
+    <meta name="description" content="Not Found">
+    <meta name="generator" content="VitePress v2.0.0-alpha.19">
+    <link rel="preload stylesheet" href="/code/docs/assets/style.A5-NQ7FS.css" as="style">
+    <link rel="preload stylesheet" href="/code/docs/vp-icons.css" as="style">
+    <script type="module" src="/code/docs/assets/chunks/metadata.fd25ef3a.js"></script>
+    <script type="module" src="/code/docs/assets/app.DgdMNIbQ.js"></script>
+    <link rel="preload" href="/code/docs/assets/inter-roman-latin.BOE8-mWI.woff2" as="font" type="font/woff2" crossorigin="">
+    <style>
+      .vp-doc .custom-block.details {
+        background-color: #ffffff;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        margin-bottom: 6px;
+      }
+      html.dark .vp-doc .custom-block.details {
+        background-color: var(--vp-c-bg-soft);
+        border-color: var(--vp-c-divider);
+      }
+      .vp-doc .custom-block.details .custom-block-title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .vp-doc .step-num {
+        font-size: 1.3em;
+      }
+      .model-spec-table table {
+        table-layout: fixed;
+        width: 100%;
+      }
+      .model-spec-table th,
+      .model-spec-table td {
+        word-wrap: break-word;
+        vertical-align: top;
+      }
+      .model-spec-table th:first-child,
+      .model-spec-table td:first-child {
+        width: 12%;
+        min-width: 100px;
+      }
+      .model-spec-table th:not(:first-child),
+      .model-spec-table td:not(:first-child) {
+        width: 22%;
+      }
+      .model-spec-table td code {
+        white-space: nowrap;
+      }
+      @media (max-width: 768px) {
+        .model-spec-table {
+          overflow-x: auto;
+          display: block;
+        }
+        .model-spec-table table {
+          min-width: 720px;
+          table-layout: auto;
+        }
+      }
+    </style>
+    <script id="check-dark-mode">(()=>{let e=localStorage.getItem(`vitepress-theme-appearance`)||`auto`,t=window.matchMedia(`(prefers-color-scheme: dark)`).matches;(!e||e===`auto`?t:e===`dark`)&&document.documentElement.classList.add(`dark`)})();</script>
+    <script id="check-mac-os">document.documentElement.classList.toggle(`mac`,/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+  </head>
+  <body>
+    <div id="app"></div>
+    
+    
+  </body>
+</html>

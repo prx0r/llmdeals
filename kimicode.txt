@@ -1,0 +1,75 @@
+Kimi Code - 搭载 Kimi K3 的 AI 编程 Agent 与 CLI 工具
+Kimi Code
+会员权益
+文档
+控制台
+K3 正式上线！最高 1M 上下文
+立即体验
+Kimi Code
+面向代码开发的权益，轻松兼容各类开发流程，
+更快更稳响应请求，高效完成编程任务
+安装 Kimi Code
+curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash
+复制
+开始使用
+使用指南
+一次订阅，全端畅写
+Terminal
+IDE
+Kimi CLI
+Welcome to Kimi Code CLI!
+Send /help for help information.
+Model: K2.7 Code
+moonshot@KimiCode
+🚀
+introduce yourself
+introduce yourself
+●
+The user is asking me to introduce myself. This is a simple greeting/question that doesn&#39;t involve any file operations or tool usage. I should simply respond directly in a friendly, concise manner.
+●
+Hello! I&#39;m Kimi Code CLI, an AI-powered coding assistant developed by Moonshot AI.
+I&#39;m designed to help you with:
+●
+💻 Software Development - Writing, debugging, and refactoring code
+●
+🔍 Codebase Analysis - Exploring and understanding large projects
+●
+🛠️ Technical Tasks - Running commands, processing files, and automating workflows
+●
+🌐 Research - Searching the web for latest information and documentation
+I can work with various programming languages, read and write files, execute shell commands, search code, fetch web content, and even spawn subagents for parallel tasks when needed.
+How can I help you today? 😊
+安装 Kimi Code
+curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash
+复制
+开始使用
+Kimi Code 可在以下 Kimi Code Plan 中使用
+Moderato 及更高档位套餐可使用 K3 模型
+购买以上任意套餐，还会获得其他
+Kimi 会员权益
+产品
+Kimi
+Kimi 开放平台
+Kimi Code
+定价
+功能
+AI Agent
+AI 建站
+AI 文档
+AI PPT
+AI 表格
+深度研究
+集群
+公司
+月之暗面
+用户服务协议
+用户隐私协议
+联系我们
+用户交流群
+飞书扫码加入
+用户交流群
+邮件联系
+© 2026 北京月之暗面科技有限公司
+京ICP备2023011302号-14
+京B2-20240852
+京公网安备11010802043150号
